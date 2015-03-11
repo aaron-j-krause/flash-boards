@@ -1,0 +1,7 @@
+**/node_modules
+**/db
+**/bower_compoents
+**/build/
+**/bower_components
+**/*test_bundle.js
+**/*.log
