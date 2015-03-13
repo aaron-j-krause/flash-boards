@@ -20,12 +20,12 @@ describe('User API', function() {
       .end(function(err, res) {
         chai.request('localhost:3000')
           .post('/posts/testguy')
-          .send({author: 'testguy', body: 'USE POST'})
+          .send({user: 'testguy', body: 'USE POST'})
           .end(function(err, res) {
             editPostId = res.body._id;
             chai.request('localhost:3000')
               .post('/posts/testguy')
-              .send({author: 'testguy', body: 'DELETE POST'})
+              .send({user: 'testguy', body: 'DELETE POST'})
               .end(function(err, res) {
                 delPostId = res.body._id;
                 done();
@@ -53,7 +53,7 @@ describe('User API', function() {
   it('should create a new post', function(done) {
     chai.request('localhost:3000')
       .post('/posts/testguy')
-      .send({author: 'testguy', body: 'test post'})
+      .send({user: 'testguy', body: 'test post'})
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
