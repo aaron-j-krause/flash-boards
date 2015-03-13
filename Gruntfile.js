@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
     jshint:{
@@ -56,13 +56,13 @@ module.exports = function(grunt) {
     },
 
     watch:{
-      files:['app/js/**/*.js', 'app/**/*.html', 'app/**/*.css'],
-      tasks:['clean', 'browserify', 'copy']
+      files:['app/js/**/*.js', 'app/**/*.html'],
+      tasks:['clean', 'browserify', 'sass', 'copy']
     },
     sass:{
       dist:{
         files:{
-          './app/css/main.css': './app/css/main.scss'
+          './build/css/main.css': './app/sass/main.scss'
         }
       }
     }

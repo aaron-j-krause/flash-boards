@@ -1,0 +1,17 @@
+/* did this shit compile? */
+@import "bourbon/bourbon";
+@import "neat/neat";
+$primary-color: #333;
+
+body {
+  font-family: $helvetica;
+  color: $primary-color;
+}
+ul{
+  @include span-columns(2);
+  li {
+    margin-bottom: 10px;
+    @include linear-gradient(50deg, yellow, pink);
+    @include span-columns(2 of 2);
+  }
+}
