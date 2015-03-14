@@ -7,6 +7,7 @@ var postData = [];
 
 $.getJSON('/posts/', function(data){
   postData = data;
+  PostStore.emitChange();
 })
 
 var PostStore = _.assign({}, EventEmitter.prototype, {
@@ -27,17 +28,31 @@ var PostStore = _.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   console.log('IN STORE dispatcher', payload);
   var action = payload.action;
-  var text;
+  var actionType = payload.action.actionType;
+  var data = payload.action.data;
 
-  if (action.actionType == 'POST_CREATE') {
-  } else if (action.actionType == 'POSTS_SET') {
-    console.log('POSTS_SET');
-    $.getJSON('/posts/', function(data){
-      postData = data;
-    });
-  } else {
-    return true;
+  var handlers = {
+    POST_CREATE: function(){
+      postData.push(data);
+    },
+    POST_EDIT: function(){
+      console.log('EDDDITT handler')
+      var index = postData.indexOf(data);
+      postData[index] = data;
+    },
+    POST_DELETE: function(){
+      console.log('DELETE HANDLEER')
+      var index = -1;
+      postData.forEach(function(p, i) {
+        if(p._id === data._id) index =  i
+      });
+      postData.splice(index, 1);
+    }
   }
+
+  if (!handlers[actionType]) return true;
+
+  handlers[actionType]();
   PostStore.emitChange();
 
   return true;

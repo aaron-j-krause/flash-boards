@@ -13,7 +13,6 @@ module.exports = React.createClass({
   },
   handleSubmit: function(event){
     event.preventDefault();
-    PostActions.createPost(this.state.createPost);
     var createPost = this.state.createPost;
     $.ajax({
       type: "POST",
@@ -21,7 +20,7 @@ module.exports = React.createClass({
       data: JSON.stringify(createPost),
       contentType: 'application/json',
       success: function(data) {
-        this.props.onCreatePostSubmit(data);
+        PostActions.createPost(data);
         var state = this.state;
         state.createPost.body = '';
         this.setState(state);

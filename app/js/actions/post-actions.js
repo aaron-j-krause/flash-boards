@@ -9,10 +9,16 @@ var PostActions = {
       data: post
     });
   },
-  setPosts: function(posts){
+  editPost: function(post){
     AppDispatcher.handleAction({
-      actionType: 'POSTS_SET',
-      data: posts
+      actionType: 'POST_EDIT',
+      data: post
+    })
+  },
+  deletePost: function(post){
+    AppDispatcher.handleAction({
+      actionType: 'POST_DELETE',
+      data: post
     })
   }
 };

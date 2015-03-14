@@ -1,4 +1,5 @@
 var React = require('react');
+var PostActions = require('../actions/post-actions');
 var $ = require('jquery');
 
 module.exports = React.createClass({
@@ -19,7 +20,7 @@ module.exports = React.createClass({
       url: this.props.url + '/' + _id,
       contentType: 'application/json',
       success: function(data) {
-        this.props.onDelete(data);
+        PostActions.deletePost(data);
       }.bind(this)
     });
   },
@@ -32,7 +33,7 @@ module.exports = React.createClass({
       data: JSON.stringify(editPost),
       contentType: 'application/json',
       success: function(data) {
-        this.props.onEdit(data);
+        PostActions.editPost(data);
         this.setState({editPost: data});
         this.props.showEdit();
       }.bind(this)

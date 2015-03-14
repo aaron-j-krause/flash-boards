@@ -16,10 +16,12 @@ module.exports = React.createClass({
   render: function() {
     var editForm;
     var buttonText = this.state.showEdit ? 'Cancel' : 'Edit Post';
+
     if (this.state.showEdit) {
-      editForm = <EditPostForm onEdit={this.props.handlers.edit} onDelete={this.props.handlers.del}
-        data={this.props.data} url={this.props.url} showEdit={this.showEdit}/>
-        }
+      editForm = <EditPostForm data={this.props.data}
+        url={this.props.url} showEdit={this.showEdit}/>
+    }
+
     return (
       <li className="post">
         <p>{this.props.data.body}</p>
