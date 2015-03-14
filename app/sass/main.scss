@@ -8,10 +8,16 @@ body {
   color: $primary-color;
 }
 ul{
-  @include span-columns(7);
+  form {
+    button {
+      @include button(pill)
+    }
+  }
+  @include span-columns(6);
   li {
     margin-bottom: 10px;
-    @include linear-gradient(65deg, green, purple);
+    @include padding(30px, 5px, 5px, null);
+    @include linear-gradient(65deg, pink, yellow);
     @include span-columns(2 of 2);
   }
 }
