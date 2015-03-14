@@ -3,9 +3,9 @@ var User = require('../models/userSchema');
 
 module.exports = function(router) {
   //on base route /posts
-  router.post('/:name', function(req, res) {
+  router.post('/', function(req, res) {
     var post = new Post({body: req.body.body, user: req.body.user});
-    User.findOne({name: req.params.name}, function(err, user) {
+    User.findOne({name: req.body.user}, function(err, user) {
       if (err || user === null)
         return res.status(500).send('Could not find user');
       post.userId = user._id;
@@ -15,11 +15,11 @@ module.exports = function(router) {
     });
   });
 
-  router.put('/:post', function(req, res) {
-    Post.findOneAndUpdate({_id: req.params.post}, {body: req.body.body},
+  router.put('/', function(req, res) {
+    Post.findOneAndUpdate({_id: req.body._id}, {body: req.body.body},
       function(err, post) {
       if (err) return res.status(500).send('Could not find user');
-      res.json({msg: 'post updated'});
+      res.json(post);
     });
   });
 
