@@ -1,50 +1,48 @@
 var React = require('react');
 var PostActions = require('../actions/post-actions');
-var $ = require('jquery');
+var request = require('superagent');
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {editPost: this.props.data};
+    return {editedPost: this.props.data};
   },
+
   handleChange: function(event) {
-    var post = this.state.editPost;
+    var post = this.state.editedPost;
     post.body = event.target.value;
-    this.setState({
-      editPost: post
-    });
+    this.setState({editedPost: post});
   },
+
   handleDelete: function(event) {
-    var _id = this.state.editPost._id;
-    $.ajax({
-      type: "DELETE",
-      url: this.props.url + '/' + _id,
-      contentType: 'application/json',
-      success: function(data) {
-        PostActions.deletePost(data);
-      }.bind(this)
-    });
+    var _id = this.state.editedPost._id;
+    var url = this.props.url + '/' + _id;
+
+    request
+      .del(url)
+      .end(function(err, res){
+        PostActions.deletePost(res.body);
+      });
   },
+
   handleSubmit: function(event) {
     event.preventDefault();
-    var editPost = this.state.editPost;
-    $.ajax({
-      type: "PUT",
-      url: this.props.url + '/',
-      data: JSON.stringify(editPost),
-      contentType: 'application/json',
-      success: function(data) {
-        PostActions.editPost(data);
-        this.setState({editPost: data});
-        this.props.showEdit();
-      }.bind(this)
-    });
+    var editedPost = this.state.editedPost;
 
+    request
+      .put(this.props.url + '/')
+      .send(editedPost)
+      .end(function(err, res){
+        PostActions.editPost(res.body);
+        this.setState({editedPost: res.body});
+        this.props.showEdit();
+      }.bind(this))
   },
+
   render: function() {
     return (
       <form name="edit-post" method="PUT" onSubmit={this.handleSubmit}>
         <input name="edit-post" type="text"
-          value={this.state.editPost.body} onChange={this.handleChange}/>
+          value={this.state.editedPost.body} onChange={this.handleChange}/>
         <input name="edit-post" type="submit" value="Save Changes"/>
         <input name="edit-post" type="button"
           onClick={this.handleDelete} value="Delete"/>
