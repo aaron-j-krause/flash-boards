@@ -1,4 +1,5 @@
 var React = require('react');
+var PostActions = require('../actions/post-actions')
 var $ = require('jquery');
 
 module.exports = React.createClass({
@@ -12,6 +13,7 @@ module.exports = React.createClass({
   },
   handleSubmit: function(event){
     event.preventDefault();
+    PostActions.createPost(this.state.createPost);
     var createPost = this.state.createPost;
     $.ajax({
       type: "POST",

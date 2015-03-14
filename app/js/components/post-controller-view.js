@@ -1,17 +1,34 @@
 var React = require('react');
+var PostStore = require('../stores/post-store');
 var CreatePostForm = require('./create-post-form');
 var PostList = require('./post-list');
 var $ = require('jquery');
+var PostActions = require('../actions/post-actions');
+
 postData = [];
+
+function getPostState(){
+  return {
+    postData: PostStore.getPosts()
+  };
+};
 
 module.exports = React.createClass({
   getInitialState: function(){
-    return({postData: postData})
+    return getPostState();
+  },
+  componentWillMount: function(){
+    PostActions.setPosts()
   },
   componentDidMount: function(){
-    $.getJSON('/posts/', function(data){
-      this.setState({postData: data});
-    }.bind(this));  
+
+    PostStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    PostStore.removeChangeListener(this._onChange)
+  },
+  _onChange: function() {
+    this.setState(getPostState());
   },
   onCreatePost: function(post){
     var state = this.state;
