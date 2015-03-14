@@ -20,6 +20,7 @@ module.exports = React.createClass({
     request
       .del(url)
       .end(function(err, res){
+        if (err) return console.log(err);
         PostActions.deletePost(res.body);
       });
   },
@@ -32,6 +33,7 @@ module.exports = React.createClass({
       .put(this.props.url + '/')
       .send(editedPost)
       .end(function(err, res){
+        if (err) return console.log(err);
         PostActions.editPost(res.body);
         this.setState({editedPost: res.body});
         this.props.showEdit();

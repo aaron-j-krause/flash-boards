@@ -1,5 +1,4 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
-var $ = require('jquery').ajax;
 
 var PostActions = {
   createPost: function(post){

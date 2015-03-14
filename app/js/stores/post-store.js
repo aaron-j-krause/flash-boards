@@ -1,14 +1,17 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var _ = require('lodash');
-var $ = require('jquery');
+var request = require('superagent')
 
 var postData = [];
 
-$.getJSON('/posts/', function(data){
-  postData = data;
-  PostStore.emitChange();
-})
+request
+  .get('/posts/')
+  .end(function(err, res){
+    if (err) return console.log(err);
+    postData = res.body;
+    PostStore.emitChange();
+  });
 
 var PostStore = _.assign({}, EventEmitter.prototype, {
   getPosts: function(){
@@ -36,12 +39,10 @@ AppDispatcher.register(function(payload) {
       postData.push(data);
     },
     POST_EDIT: function(){
-      console.log('EDDDITT handler')
       var index = postData.indexOf(data);
       postData[index] = data;
     },
     POST_DELETE: function(){
-      console.log('DELETE HANDLEER')
       var index = -1;
       postData.forEach(function(p, i) {
         if(p._id === data._id) index =  i
