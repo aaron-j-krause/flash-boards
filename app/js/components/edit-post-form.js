@@ -42,7 +42,8 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <form name="edit-post" method="PUT" onSubmit={this.handleSubmit}>
+      <form name="edit-post" method="PUT" className="edit-post-form"
+        onSubmit={this.handleSubmit}>
         <input name="edit-post" type="text"
           value={this.state.editedPost.body} onChange={this.handleChange}/>
         <input name="edit-post" type="submit" value="Save Changes"/>

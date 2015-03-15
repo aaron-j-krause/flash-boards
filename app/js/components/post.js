@@ -18,15 +18,15 @@ module.exports = React.createClass({
     var buttonText = this.state.showEdit ? 'Cancel' : 'Edit Post';
 
     if (this.state.showEdit) {
-      editForm = <EditPostForm data={this.props.data}
-        url={this.props.url} showEdit={this.showEdit}/>
+      editForm = <EditPostForm className="edit-post-form"
+        data={this.props.data} url={this.props.url} showEdit={this.showEdit}/>
     }
 
     return (
       <li className="post">
-        <p>{this.props.data.body}</p>
-        <p>posted by: {this.props.data.user}</p>
-        <button onClick={this.showEdit}>{buttonText}</button>
+        <section className="post-body">{this.props.data.body}</section>
+        <aside className="user-data">posted by: {this.props.data.user}</aside>
+        <button className="show-edit" onClick={this.showEdit}>{buttonText}</button>
         {editForm}
       </li>
     );

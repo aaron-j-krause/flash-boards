@@ -31,8 +31,13 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <PostList data={this.state.postData} url={this.props.postsBaseUrl} />
-        <CreatePostForm url={this.props.postsBaseUrl} />
+        <header></header>
+        <main>
+          <PostList data={this.state.postData} url={this.props.postsBaseUrl} />
+        </main>
+        <footer>
+          <CreatePostForm url={this.props.postsBaseUrl} />
+        </footer>
       </div>
     )
   }
