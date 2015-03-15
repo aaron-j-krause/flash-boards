@@ -5,10 +5,10 @@ var assign = require('object-assign');
 var userData = [];
 
 var UserStore = assign({}, EventEmitter.prototype, {
-  getUsers: function(){
+  getUsers: function() {
     return userData;
   },
-  emitChange: function(){
+  emitChange: function() {
     this.emit('change');
   },
   addChangeListener: function(callback) {
@@ -27,13 +27,13 @@ AppDispatcher.register(function(payload) {
     USER_GET_ALL: function() {
       return promise.then(function(res) {
         console.log(res.body);
-      })
+      });
     }
   };
 
   if (!handlers[actionType]) return true;
 
-  handlers[actionType]().then(function(){
+  handlers[actionType]().then(function() {
     UserStore.emitChange();
   });
 

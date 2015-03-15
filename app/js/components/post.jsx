@@ -1,5 +1,5 @@
 var React = require('react');
-var EditPostForm = require('./edit-post-form');
+var EditPostForm = require('./edit-post-form.jsx');
 
 module.exports = React.createClass({
   getInitialState: function(){

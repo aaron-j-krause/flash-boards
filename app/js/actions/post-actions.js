@@ -5,16 +5,15 @@ var PostAPI = require('../api/post-api.js');
 //here to be dealt with in the post-store
 
 module.exports = {
-  createPost: function(post){
+  createPost: function(post) {
     var promise = PostAPI.createNewPost(post);
-    console.log('post_create')
     AppDispatcher.handleAction({
       actionType: 'POST_CREATE',
       promise: promise
     });
   },
 
-  editPost: function(post){
+  editPost: function(post) {
     var promise = PostAPI.updatePost(post);
     AppDispatcher.handleAction({
       actionType: 'POST_EDIT',
@@ -22,7 +21,7 @@ module.exports = {
     });
   },
 
-  deletePost: function(post){
+  deletePost: function(post) {
     var promise = PostAPI.deletePost(post);
     AppDispatcher.handleAction({
       actionType: 'POST_DELETE',

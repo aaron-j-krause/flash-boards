@@ -1,5 +1,5 @@
 var React = require('react');
-var Post = require('./post');
+var Post = require('./post.jsx');
 
 module.exports = React.createClass({
   render: function() {

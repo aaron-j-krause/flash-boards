@@ -1,7 +1,7 @@
 var React = require('react');
 var PostStore = require('../stores/post-store');
-var CreatePostForm = require('./create-post-form');
-var PostList = require('./post-list');
+var CreatePostForm = require('./create-post-form.jsx');
+var PostList = require('./post-list.jsx');
 var PostActions = require('../actions/post-actions');
 var UserActions = require('../actions/user-actions');
 

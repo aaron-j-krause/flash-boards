@@ -1,6 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var passport = require('passport');
 var app = express();
+
+var assignPassportBasic = require('./lib/basic-strategy');
 
 var assignUserRoutes = require('./routes/userRoutes');
 var assignPostRoutes = require('./routes/postRoutes');
@@ -11,6 +14,8 @@ var bodyParser = require('body-parser');
 
 //passport
 app.set('appSecret', process.env.SECRET || 'chaaaaaange');
+app.use(passport.initialize());
+assignPassportBasic(passport);
 
 if (!(process.env.TEST_MODE)) app.use(morgan('dev'));
 app.use(bodyParser.json());

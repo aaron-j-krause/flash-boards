@@ -5,7 +5,7 @@ var assign = require('object-assign');
 var postData = [];
 
 var PostStore = assign({}, EventEmitter.prototype, {
-  getPosts: function(){
+  getPosts: function() {
     return postData;
   },
   emitChange: function() {
@@ -31,23 +31,23 @@ AppDispatcher.register(function(payload) {
         postData.push(res.body);
       });
     },
-    POST_EDIT: function(){
+    POST_EDIT: function() {
       return promise.then(function(res) {
         var index = postData.indexOf(res.body);
         postData[index] = res.body;
       });
     },
-    POST_DELETE: function(){
-      return promise.then(function(res){
+    POST_DELETE: function() {
+      return promise.then(function(res) {
         var index = -1;
         postData.forEach(function(p, i) {
-          if(p._id === res.body._id) index =  i
+          if (p._id === res.body._id) index =  i;
         });
         postData.splice(index, 1);
       });
     },
-    POST_GET_ALL: function(){
-      return promise.then(function(res){
+    POST_GET_ALL: function() {
+      return promise.then(function(res) {
         postData = res.body;
       });
     }
@@ -55,7 +55,7 @@ AppDispatcher.register(function(payload) {
 
   if (!handlers[actionType]) return true;
 
-  handlers[actionType]().then(function(){
+  handlers[actionType]().then(function() {
     PostStore.emitChange();
   });
 

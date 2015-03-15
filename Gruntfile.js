@@ -51,16 +51,17 @@ module.exports = function(grunt) {
 
     browserify:{
       dev:{
-        src: ['app/js/**/*.js'],
+        src: ['app/js/**/*.js', 'app/js/**/*.jsx'],
         dest: 'build/bundle.js'
       },
       options:{
-        transform:['reactify', 'debowerify']
+        transform:['reactify']
       }
     },
 
     watch:{
-      files:['app/js/**/*.js', 'app/**/*.html', 'app/sass/*.scss'],
+      files:['app/js/**/*.js', 'app/js/**/*.jsx', 'app/**/*.html',
+        'app/sass/*.scss'],
       tasks:['clean', 'browserify', 'sass', 'copy']
     },
     sass:{

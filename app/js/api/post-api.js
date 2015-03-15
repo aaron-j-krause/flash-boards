@@ -4,7 +4,7 @@ var request = require('superagent');
 
 exports = module.exports = {};
 
-function makePromise(method, url, body){
+function makePromise(method, url, body) {
   return new Promise(function(resolve, reject) {
     request(method, url)
       .send(body)
@@ -13,11 +13,11 @@ function makePromise(method, url, body){
         else resolve(res);
       });
   });
-};
+}
 
 exports.getAllPosts = function() {
   var promise = makePromise('GET', '/posts/', null);
-  return promise.catch(function(err){
+  return promise.catch(function(err) {
     console.log(err);
   });
 };
@@ -38,7 +38,7 @@ exports.updatePost = function(post) {
 
 exports.deletePost = function(post) {
   var url = '/posts/' + post._id;
-  var promise = makePromise('DELETE', url, null)
+  var promise = makePromise('DELETE', url, null);
   return promise.catch(function(err) {
     console.log(err);
   });
