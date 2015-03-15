@@ -3,6 +3,7 @@ var PostStore = require('../stores/post-store');
 var CreatePostForm = require('./create-post-form');
 var PostList = require('./post-list');
 var PostActions = require('../actions/post-actions');
+var api = require('../api/post-api');
 
 function getPostState(){
   return {
@@ -17,6 +18,7 @@ module.exports = React.createClass({
 
   componentDidMount: function(){
     PostStore.addChangeListener(this._onChange);
+    PostActions.getPosts();
   },
 
   componentWillUnmount: function() {

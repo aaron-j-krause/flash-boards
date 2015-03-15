@@ -16,16 +16,11 @@ module.exports = React.createClass({
     var createdPost = this.state.createdPost;
     var url = this.props.url + '/';
 
-    request
-      .post(url)
-      .send(createdPost)
-      .end(function(err, res){
-        if (err) return console.log(err);
-        PostActions.createPost(res.body);
-        var state = this.state;
-        state.createdPost.body = '';
-        this.setState(state);
-      }.bind(this))
+    PostActions.createPost(createdPost);
+
+    var state = this.state;
+    state.createdPost.body = '';
+    this.setState(state);
 
   },
   render: function() {

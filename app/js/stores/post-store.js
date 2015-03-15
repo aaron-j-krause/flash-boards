@@ -5,14 +5,6 @@ var request = require('superagent')
 
 var postData = [];
 
-request
-  .get('/posts/')
-  .end(function(err, res){
-    if (err) return console.log(err);
-    postData = res.body;
-    PostStore.emitChange();
-  });
-
 var PostStore = _.assign({}, EventEmitter.prototype, {
   getPosts: function(){
     return postData;
@@ -35,8 +27,10 @@ AppDispatcher.register(function(payload) {
   var data = payload.action.data;
 
   var handlers = {
-    POST_CREATE: function(){
-      postData.push(data);
+    POST_CREATE: function() {
+      return data.then(function(res) {
+        postData.push(res.body);
+      });
     },
     POST_EDIT: function(){
       var index = postData.indexOf(data);
@@ -48,12 +42,19 @@ AppDispatcher.register(function(payload) {
         if(p._id === data._id) index =  i
       });
       postData.splice(index, 1);
+    },
+    POST_GET_ALL: function(){
+      return data.then(function(res){
+        postData = res.body;
+      })
     }
   }
 
   if (!handlers[actionType]) return true;
 
-  handlers[actionType]();
+  handlers[actionType]().then(function(){
+    PostStore.emitChange();
+  })
   PostStore.emitChange();
 
   return true;

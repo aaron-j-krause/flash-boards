@@ -1,11 +1,13 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
+var api = require('../api/post-api.js');
 
 var PostActions = {
   createPost: function(post){
-    console.log('IN ACTIONS', post);
+    var promise = api.createNewPost(post);
+    console.log('post_create')
     AppDispatcher.handleAction({
       actionType: 'POST_CREATE',
-      data: post
+      data: promise
     });
   },
   editPost: function(post){
@@ -18,6 +20,13 @@ var PostActions = {
     AppDispatcher.handleAction({
       actionType: 'POST_DELETE',
       data: post
+    })
+  },
+  getPosts: function() {
+    var promise = api.getAllPosts();
+    AppDispatcher.handleAction({
+      actionType: 'POST_GET_ALL',
+      data: promise
     })
   }
 };
