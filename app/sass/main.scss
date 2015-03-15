@@ -17,8 +17,8 @@ $color3: hsl($main-color-hue + (120 * 2), $main-color-saturation, $main-color-li
   border-radius: 28px;
   font-family: $helvetica;
   color: #ffffff;
-  font-size: 12px;
-  padding: 5px 10px 5px 10px;
+  font-size: 10px;
+  padding: 3px 7px 3px 7px;
   text-decoration: none;
   outline: none;
 }
@@ -33,19 +33,29 @@ body {
   color: $primary-color;
   @include outer-container(50%);
   margin: 0 auto;
+  min-width: 525px;
 }
 
 header {
   height: 100px;
   background-color: lighten($color3, 30%);
   margin-bottom: 20px;
-
+  border-radius: 10px;
 }
 
 footer {
-  height: 100px;
+  height: 120px;
   background-color: lighten($color3, 30%);
-  margin-top: 20px;
+  margin: 20px 0px 20px 0px;
+  border-radius: 10px;
+  padding: 10px;
+  form.create-post-form {
+    @include span-columns(4);
+    @include shift(3);
+    textarea {
+      @include size(300px 75px);
+    }
+  }
 
 }
 
@@ -65,6 +75,8 @@ main {
       @include fill-parent();
 
       section.post-body {
+        min-height: 100px;
+        min-width: 100px;
         @include fill-parent();
         @include span-columns(5 of 6);
       }
@@ -89,9 +101,6 @@ main {
 
         input[type="submit"], input[type="button"] {
           float: right;
-        }
-        button {
-          @include button(pill)
         }
       }
     }

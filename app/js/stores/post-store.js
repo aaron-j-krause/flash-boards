@@ -1,11 +1,10 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var _ = require('lodash');
-var request = require('superagent')
+var assign = require('object-assign');
 
 var postData = [];
 
-var PostStore = _.assign({}, EventEmitter.prototype, {
+var PostStore = assign({}, EventEmitter.prototype, {
   getPosts: function(){
     return postData;
   },
@@ -16,7 +15,7 @@ var PostStore = _.assign({}, EventEmitter.prototype, {
     this.on('change', callback);
   },
   removeChangeListener: function(callback) {
-    this.removeListener('change', callback)
+    this.removeListener('change', callback);
   }
 });
 

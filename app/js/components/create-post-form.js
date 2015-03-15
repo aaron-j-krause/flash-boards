@@ -25,9 +25,10 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <form name="create-post" method="POST" onSubmit={this.handleSubmit}>
-        <input name="create-post" value={this.state.createdPost.body}
-        onChange={this.handleChange} type="text"/>
+      <form name="create-post" method="POST" className="create-post-form"
+        onSubmit={this.handleSubmit}>
+        <textarea name="create-post" value={this.state.createdPost.body}
+        onChange={this.handleChange}></textarea>
         <input name="create-post" type="submit" value="Create Post"/>
       </form>
     );

@@ -1,5 +1,4 @@
 var React = require('react');
-
 var EditPostForm = require('./edit-post-form');
 
 module.exports = React.createClass({
@@ -8,11 +7,13 @@ module.exports = React.createClass({
       showEdit: false
     }
   },
+
   showEdit: function(event){
     var state = this.state;
     state.showEdit = !state.showEdit;
     this.setState(state);
   },
+
   render: function() {
     var editForm;
     var buttonText = this.state.showEdit ? 'Cancel' : 'Edit Post';

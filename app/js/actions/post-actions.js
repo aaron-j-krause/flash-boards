@@ -4,7 +4,7 @@ var PostAPI = require('../api/post-api.js');
 //API calls return a promise which is dispatched from
 //here to be dealt with in the post-store
 
-var PostActions = {
+module.exports = {
   createPost: function(post){
     var promise = PostAPI.createNewPost(post);
     console.log('post_create')
@@ -38,5 +38,3 @@ var PostActions = {
     })
   }
 };
-
-module.exports = PostActions;
