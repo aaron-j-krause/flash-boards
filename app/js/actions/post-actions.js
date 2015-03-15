@@ -1,32 +1,40 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
-var api = require('../api/post-api.js');
+var PostAPI = require('../api/post-api.js');
+
+//API calls return a promise which is dispatched from
+//here to be dealt with in the post-store
 
 var PostActions = {
   createPost: function(post){
-    var promise = api.createNewPost(post);
+    var promise = PostAPI.createNewPost(post);
     console.log('post_create')
     AppDispatcher.handleAction({
       actionType: 'POST_CREATE',
-      data: promise
+      promise: promise
     });
   },
+
   editPost: function(post){
+    var promise = PostAPI.updatePost(post);
     AppDispatcher.handleAction({
       actionType: 'POST_EDIT',
-      data: post
+      promise: promise
     })
   },
+
   deletePost: function(post){
+    var promise = PostAPI.deletePost(post);
     AppDispatcher.handleAction({
       actionType: 'POST_DELETE',
-      data: post
+      promise: promise
     })
   },
+
   getPosts: function() {
-    var promise = api.getAllPosts();
+    var promise = PostAPI.getAllPosts();
     AppDispatcher.handleAction({
       actionType: 'POST_GET_ALL',
-      data: promise
+      promise: promise
     })
   }
 };

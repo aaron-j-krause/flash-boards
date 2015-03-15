@@ -14,30 +14,18 @@ module.exports = React.createClass({
   },
 
   handleDelete: function(event) {
-    var _id = this.state.editedPost._id;
-    var url = this.props.url + '/' + _id;
+    var editedPost = this.state.editedPost;
 
-    request
-      .del(url)
-      .end(function(err, res){
-        if (err) return console.log(err);
-        PostActions.deletePost(res.body);
-      });
+    PostActions.deletePost(editedPost);
   },
 
   handleSubmit: function(event) {
     event.preventDefault();
     var editedPost = this.state.editedPost;
 
-    request
-      .put(this.props.url + '/')
-      .send(editedPost)
-      .end(function(err, res){
-        if (err) return console.log(err);
-        PostActions.editPost(res.body);
-        this.setState({editedPost: res.body});
-        this.props.showEdit();
-      }.bind(this))
+    PostActions.editPost(editedPost);
+    this.setState(editedPost);
+    this.props.showEdit();
   },
 
   render: function() {

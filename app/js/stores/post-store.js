@@ -20,42 +20,46 @@ var PostStore = _.assign({}, EventEmitter.prototype, {
   }
 });
 
+//handles promises sent from actions
+
 AppDispatcher.register(function(payload) {
-  console.log('IN STORE dispatcher', payload);
   var action = payload.action;
   var actionType = payload.action.actionType;
-  var data = payload.action.data;
+  var promise = payload.action.promise;
 
   var handlers = {
     POST_CREATE: function() {
-      return data.then(function(res) {
+      return promise.then(function(res) {
         postData.push(res.body);
       });
     },
     POST_EDIT: function(){
-      var index = postData.indexOf(data);
-      postData[index] = data;
+      return promise.then(function(res) {
+        var index = postData.indexOf(res.body);
+        postData[index] = res.body;
+      });
     },
     POST_DELETE: function(){
-      var index = -1;
-      postData.forEach(function(p, i) {
-        if(p._id === data._id) index =  i
+      return promise.then(function(res){
+        var index = -1;
+        postData.forEach(function(p, i) {
+          if(p._id === res.body._id) index =  i
+        });
+        postData.splice(index, 1);
       });
-      postData.splice(index, 1);
     },
     POST_GET_ALL: function(){
-      return data.then(function(res){
+      return promise.then(function(res){
         postData = res.body;
-      })
+      });
     }
-  }
+  };
 
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function(){
     PostStore.emitChange();
-  })
-  PostStore.emitChange();
+  });
 
   return true;
 
