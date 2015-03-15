@@ -1,6 +1,6 @@
 /* did this shit compile? */
-@import "bourbon/bourbon";
-@import "neat/neat";
+@import "bourbon";
+@import "neat";
 $primary-color: #333;
 $main-color: hsl(232, 100%, 37%);
 $main-color-hue: hue($main-color);
@@ -84,7 +84,7 @@ main {
         padding-bottom: 5px;
 
         input[type="text"]{
-          @incude size(20% auto)
+          @include size(20% auto);
         }
 
         input[type="submit"], input[type="button"] {

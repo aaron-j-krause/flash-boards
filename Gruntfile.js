@@ -1,3 +1,7 @@
+var bourbonPaths = require('node-bourbon').includePaths;
+var neatPaths = require('node-neat').includePaths;
+var sassPaths = bourbonPaths.concat(neatPaths);
+
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
@@ -5,7 +9,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
     jshint:{
@@ -61,6 +65,9 @@ module.exports = function(grunt) {
     },
     sass:{
       dist:{
+        options:{
+          includePaths: sassPaths
+        },
         files:{
           './build/css/main.css': './app/sass/main.scss'
         }
