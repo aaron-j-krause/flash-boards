@@ -19,7 +19,7 @@ module.exports = {
     AppDispatcher.handleAction({
       actionType: 'POST_EDIT',
       promise: promise
-    })
+    });
   },
 
   deletePost: function(post){
@@ -27,7 +27,7 @@ module.exports = {
     AppDispatcher.handleAction({
       actionType: 'POST_DELETE',
       promise: promise
-    })
+    });
   },
 
   getPosts: function() {
@@ -35,6 +35,6 @@ module.exports = {
     AppDispatcher.handleAction({
       actionType: 'POST_GET_ALL',
       promise: promise
-    })
+    });
   }
 };

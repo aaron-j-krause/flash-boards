@@ -22,7 +22,6 @@ var PostStore = assign({}, EventEmitter.prototype, {
 //handles promises sent from actions
 
 AppDispatcher.register(function(payload) {
-  var action = payload.action;
   var actionType = payload.action.actionType;
   var promise = payload.action.promise;
 

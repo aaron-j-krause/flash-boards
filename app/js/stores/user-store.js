@@ -20,5 +20,22 @@ var UserStore = assign({}, EventEmitter.prototype, {
 });
 
 AppDispatcher.register(function(payload) {
+  var promise = payload.action.promise;
+  var actionType = payload.action.action;
+
+  var handlers = {
+    USER_GET_ALL: function() {
+      return promise.then(function(res) {
+        console.log(res.body);
+      })
+    }
+  };
+
+  if (!handlers[actionType]) return true;
+
+  handlers[actionType]().then(function(){
+    UserStore.emitChange();
+  });
+
   return true;
 });

@@ -4,14 +4,15 @@ var UserApi = require('../api/user-api');
 module.exports = {
   getUsers: function() {
     var promise = UserApi.getAllUsers();
-    AppDispatcher.dispatch({
-      action: 'USERS_GET_ALL',
+    console.log('USER_GET_ALL')
+    AppDispatcher.handleAction({
+      action: 'USER_GET_ALL',
       promise: promise
     });
   },
   createUser: function(user) {
     var promise = UserApi.createNewUser(user);
-    AppDispatcher.dispatch({
+    AppDispatcher.handleAction({
       action: 'USER_CREATE',
       promise: promise
     });

@@ -1,4 +1,4 @@
-var request = require('request');
+var request = require('superagent');
 var Promise = require('promise');
 
 exports = module.exports = {};
@@ -22,8 +22,8 @@ exports.getAllUsers = function(){
   })
 };
 
-exports.createNewUser = function() {
-  var promise = makePromise('POST', '/user/');
+exports.createNewUser = function(user) {
+  var promise = makePromise('POST', '/user/', user);
 
   return promise.catch(function(err) {
     console.log(err);
