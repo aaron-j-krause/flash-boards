@@ -29,6 +29,10 @@ exports.createNewUser = function(user) {
   });
 };
 
+exports.signOut = function(name) {
+  return Promise.resolve(name)
+}
+
 exports.signIn = function(user) {
   return new Promise(function(resolve, reject){
     request

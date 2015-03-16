@@ -18,9 +18,16 @@ module.exports = {
     });
   },
   signIn: function(user) {
-    promise = UserApi.signIn(user);
+    var promise = UserApi.signIn(user);
     AppDispatcher.handleAction({
       action: 'USER_SIGN_IN',
+      promise: promise
+    })
+  },
+  signOut: function(name) {
+    var promise = UserApi.signOut(name);
+    AppDispatcher.handleAction({
+      action: 'USER_SIGN_OUT',
       promise: promise
     })
   }

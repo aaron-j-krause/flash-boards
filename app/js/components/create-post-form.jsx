@@ -1,5 +1,6 @@
 var React = require('react');
-var PostActions = require('../actions/post-actions')
+var PostActions = require('../actions/post-actions');
+var UserActions = require('../actions/user-actions');
 var request = require('superagent');
 
 module.exports = React.createClass({
@@ -23,6 +24,10 @@ module.exports = React.createClass({
     this.setState(state);
 
   },
+  signOut: function(event) {
+    event.preventDefault();
+    UserActions.signOut(this.props.sessionData.name);
+  },
   render: function() {
     return (
       <form name="create-post" method="POST" className="create-post-form"
@@ -30,6 +35,7 @@ module.exports = React.createClass({
         <textarea name="create-post" value={this.state.createdPost.body}
         onChange={this.handleChange}></textarea>
         <input name="create-post" type="submit" value="Create Post"/>
+        <button name="log-out" onClick={this.signOut} >Sign Out</button>
       </form>
     );
   }

@@ -3,10 +3,10 @@ var Post = require('./post.jsx');
 
 module.exports = React.createClass({
   render: function() {
-    var posts = this.props.data.map(function(post){
+    var posts = this.props.postData.map(function(post){
       return (
-        <Post data={post} key={post._id}
-          url={this.props.url}/>
+        <Post postData={post} key={post._id} url={this.props.url}
+          sessionData={this.props.sessionData}/>
       )
     }.bind(this));
     return (

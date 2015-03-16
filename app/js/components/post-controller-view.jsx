@@ -41,7 +41,7 @@ module.exports = React.createClass({
       <div>
         <header></header>
         <main>
-          <PostList data={this.state.postData} sessionData={this.state.session}/>
+          <PostList postData={this.state.postData} sessionData={this.state.session}/>
         </main>
         <Footer sessionData={this.state.session}/>
       </div>

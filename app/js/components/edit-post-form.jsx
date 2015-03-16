@@ -4,7 +4,7 @@ var request = require('superagent');
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {editedPost: this.props.data};
+    return {editedPost: this.props.postData};
   },
 
   handleChange: function(event) {

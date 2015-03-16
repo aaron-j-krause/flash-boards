@@ -6,6 +6,10 @@ var userData = [];
 
 var session = {loggedIn: false}
 
+function resetSession() {
+  session = {loggedIn: false};
+}
+
 var UserStore = assign({}, EventEmitter.prototype, {
   getUsers: function() {
     return userData;
@@ -48,6 +52,11 @@ AppDispatcher.register(function(payload) {
           loggedIn: false,
           error: 'Incorrect login information'
         };
+      })
+    },
+    USER_SIGN_OUT: function() {
+      return promise.then(function() {
+        resetSession();
       })
     }
   };
