@@ -2,7 +2,6 @@ var request = require('superagent');
 var Promise = require('promise');
 
 exports = module.exports = {};
-
 function makePromise(method, url, body) {
   return new Promise(function(resolve, reject) {
     request(method, url)

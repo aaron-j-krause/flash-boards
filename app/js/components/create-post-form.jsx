@@ -16,7 +16,6 @@ module.exports = React.createClass({
     var createdPost = this.state.createdPost;
     createdPost.user = this.props.sessionData.name
     var url = this.props.url + '/';
-
     PostActions.createPost(createdPost);
 
     var state = this.state;
@@ -25,7 +24,6 @@ module.exports = React.createClass({
 
   },
   render: function() {
-    console.log(this.props.sessionData, this.state.sessionData);
     return (
       <form name="create-post" method="POST" className="create-post-form"
         onSubmit={this.handleSubmit}>

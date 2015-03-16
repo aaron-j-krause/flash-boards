@@ -35,6 +35,8 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var state = getState();
+    var storeSession = UserStore.getSession()
     return (
       <div>
         <header></header>
