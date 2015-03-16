@@ -25,7 +25,7 @@ var userRouter = express.Router();
 var postRouter = express.Router();
 
 assignPostRoutes(postRouter);
-assignUserRoutes(userRouter);
+assignUserRoutes(userRouter, passport, app.get('appSecret'));
 
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
