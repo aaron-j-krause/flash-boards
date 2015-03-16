@@ -28,6 +28,16 @@ $color3: hsl($main-color-hue + (120 * 2), $main-color-saturation, $main-color-li
   text-decoration: none;
 }
 
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+div.welcome {
+  margin: 200px auto 300px auto;
+  @include size(400px 200px);
+}
+
 body {
   font-family: $helvetica;
   color: $primary-color;
@@ -49,12 +59,15 @@ footer {
   margin: 20px 0px 20px 0px;
   border-radius: 10px;
   padding: 10px;
-  form.create-post-form {
+  form {
     @include span-columns(4);
     @include shift(3);
     textarea {
       @include size(300px 75px);
     }
+  }
+  span {
+    color: red;
   }
 
 }

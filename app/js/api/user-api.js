@@ -29,3 +29,15 @@ exports.createNewUser = function(user) {
     console.log(err);
   });
 };
+
+exports.signIn = function(user) {
+  return new Promise(function(resolve, reject){
+    request
+    .get('/user/signin')
+    .auth(user.email, user.password)
+    .end(function(err, res){
+      if(err) reject(err);
+      else resolve (res);
+    });
+  });
+}

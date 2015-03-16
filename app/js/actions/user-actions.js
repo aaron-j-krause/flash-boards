@@ -16,5 +16,12 @@ module.exports = {
       action: 'USER_CREATE',
       promise: promise
     });
+  },
+  signIn: function(user) {
+    promise = UserApi.signIn(user);
+    AppDispatcher.handleAction({
+      action: 'USER_SIGN_IN',
+      promise: promise
+    })
   }
 };

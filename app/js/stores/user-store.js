@@ -4,18 +4,23 @@ var assign = require('object-assign');
 
 var userData = [];
 
+var session = {loggedIn: false}
+
 var UserStore = assign({}, EventEmitter.prototype, {
   getUsers: function() {
     return userData;
   },
+  getSession: function() {
+    return session;
+  },
   emitChange: function() {
-    this.emit('change');
+    this.emit('userchange');
   },
   addChangeListener: function(callback) {
-    this.on('change', callback);
+    this.on('userchange', callback);
   },
   removeChangeListener: function(callback) {
-    this.removeListener('change', callback);
+    this.removeListener('userchange', callback);
   }
 });
 
@@ -28,6 +33,22 @@ AppDispatcher.register(function(payload) {
       return promise.then(function(res) {
         console.log(res.body);
       });
+    },
+    USER_SIGN_IN: function() {
+      return promise.then(function(res) {
+        session = {
+          loggedIn: true,
+          name: res.body.name,
+          token: res.body.token
+        }
+      },
+      function(err){
+        console.log(err);
+        session = {
+          loggedIn: false,
+          error: 'Incorrect login information'
+        };
+      })
     }
   };
 
@@ -39,3 +60,6 @@ AppDispatcher.register(function(payload) {
 
   return true;
 });
+
+module.exports = UserStore;
+

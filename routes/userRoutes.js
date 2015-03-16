@@ -15,8 +15,10 @@ module.exports = function(router, passport, appSecret) {
     function(req, res){
       req.user.generateToken(appSecret, function(err, token){
         if (err) res.status(500).send({'msg':'could not generate token'});
-
-        res.json(token);
+        User.findOne({email: req.user.email}, function(err, user) {
+          if (err || !user) return res.status(500).send({'msg':'could not find user'})
+          res.json({token: token, name: user.name});
+        })
       });
   });
 
