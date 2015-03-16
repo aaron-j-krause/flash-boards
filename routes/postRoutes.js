@@ -36,4 +36,11 @@ module.exports = function(router) {
       res.json(posts);
     });
   });
+
+  router.get('/:name', function(req, res) {
+    Post.find({name: req.params.name}, function(err, posts) {
+      if (err) return res.status(500).send('Could not find posts');
+      res.json(posts);
+    })
+  })
 };
