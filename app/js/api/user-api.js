@@ -36,11 +36,23 @@ exports.signOut = function(name) {
 exports.signIn = function(user) {
   return new Promise(function(resolve, reject){
     request
-    .get('/user/signin')
-    .auth(user.email, user.password)
-    .end(function(err, res){
-      if(err) reject(err);
-      else resolve (res);
-    });
+      .get('/user/signin')
+      .auth(user.email, user.password)
+      .end(function(err, res){
+        if(err) reject(err);
+        else resolve(res);
+      });
+  });
+}
+
+exports.getSignedIn = function(token) {
+  return new Promise(function(resolve, rejecct) {
+    request
+      .get('/user/signed-in')
+      .set('token', token)
+      .end(function(err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
   });
 }

@@ -1,11 +1,13 @@
 var React = require('react');
 var SignInForm = require('./signin-form.jsx');
 var CreatePostForm = require('./create-post-form.jsx');
+var Cookies = require('cookies-js');
 
 module.exports = React.createClass({
   render: function() {
-    var session = this.props.sessionData
-    var form = session.loggedIn ? <CreatePostForm sessionData={session}/> : <SignInForm/>;
+    console.log('cookie crisp', Cookies.get('eat'));
+    var session = this.props.sessionData;
+    var form = Cookies.get('eat') ? <CreatePostForm sessionData={session}/> : <SignInForm/>;
     var error = session.error ? <span>{session.error}</span> : '';
     return (
       <footer>
@@ -14,4 +16,4 @@ module.exports = React.createClass({
       </footer>
     );
   }
-})
+});

@@ -1,6 +1,8 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var EventEmitter = require('events').EventEmitter;
+var isPromise = require('is-promise');
 var assign = require('object-assign');
+var Cookies = require('cookies-js');
 
 var userData = [];
 
@@ -40,6 +42,7 @@ AppDispatcher.register(function(payload) {
     },
     USER_SIGN_IN: function() {
       return promise.then(function(res) {
+        Cookies.set('eat', res.body.token);
         session = {
           loggedIn: true,
           name: res.body.name,
@@ -57,6 +60,7 @@ AppDispatcher.register(function(payload) {
     USER_SIGN_OUT: function() {
       return promise.then(function() {
         resetSession();
+        Cookies.set('eat', '');
       })
     }
   };

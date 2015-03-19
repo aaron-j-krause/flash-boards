@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/userSchema');
+var eat = require('eat');
 
 module.exports = function(router, passport, appSecret) {
   //on base route /user
@@ -18,6 +19,12 @@ module.exports = function(router, passport, appSecret) {
         res.json({token: token, name: req.user.name});
       });
   });
+
+  router.get('/signed-in', function(req, res) {
+    console.log(req.headers);
+    console.log(req.headers.token);
+    //var token = eat.decode(req.headers.token);
+  })
 
   router.post('/', function(req, res) {
     var newUser = new User({name: req.body.name});

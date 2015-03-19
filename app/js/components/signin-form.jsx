@@ -18,6 +18,7 @@ module.exports = React.createClass({
     event.preventDefault();
     var user = this.state;
     UserActions.signIn(user);
+    UserActions.getSignedIn('THISISATOKEN');
     this.setState({email: '', password: ''});
   },
   render: function() {

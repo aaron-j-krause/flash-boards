@@ -1,11 +1,11 @@
 var React = require('react');
-var CreatePostForm = require('./create-post-form.jsx');
 var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
 var PostStore = require('../stores/post-store');
 var PostActions = require('../actions/post-actions');
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
+var Cookies = require('cookies-js');
 
 function getState(){
   return {
@@ -23,6 +23,9 @@ module.exports = React.createClass({
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     PostActions.getPosts();
+    if(Cookies.get('eat')){
+      
+    }
   },
 
   componentWillUnmount: function() {
