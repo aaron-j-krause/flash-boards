@@ -18,6 +18,7 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return userData;
   },
   getSession: function() {
+    console.log('get session', session);
     return session;
   },
   emitChange: function() {
@@ -43,13 +44,12 @@ AppDispatcher.register(function(payload) {
     },
     USER_SIGN_IN: function() {
       return promise.then(function(res) {
+        console.log('signinzzz', res.body.token);
         Cookies.set('eat', res.body.token);
         session = {
-          loggedIn: true,
-          name: res.body.name,
-          token: res.body.token
-        }
-        UserActions.getSignedIn(token);
+          loggedIn: true
+        };
+        //UserActions.getSignedIn(res.body.token);
       },
       function(err){
         console.log(err);
@@ -57,19 +57,34 @@ AppDispatcher.register(function(payload) {
           loggedIn: false,
           error: 'Incorrect login information'
         };
-      })
+      });
     },
     USER_SIGN_OUT: function() {
       return promise.then(function() {
         resetSession();
         Cookies.set('eat', '');
-      })
+      });
+    },
+    USER_GET_SIGNED_IN: function() {
+      console.log('hmm');
+      return promise.then(function(res) {
+        session = {
+          loggedIn: true,
+          name: res.body.name
+        };
+      }, function(err) {
+        console.log(err, 'decode err')
+        session = {
+          loggedIn: false
+        }
+      });
     }
   };
 
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function() {
+    console.log('how many changes');
     UserStore.emitChange();
   });
 

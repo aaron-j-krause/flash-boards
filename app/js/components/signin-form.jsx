@@ -19,7 +19,6 @@ module.exports = React.createClass({
     event.preventDefault();
     var user = this.state;
     UserActions.signIn(user);
-    console.log(Cookies.get('eat'), 'ISTHIERECOKKOES')
     this.setState({email: '', password: ''});
   },
   render: function() {

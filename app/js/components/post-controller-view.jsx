@@ -20,11 +20,14 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(){
+    var token = Cookies.get('eat');
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     PostActions.getPosts();
-    if(Cookies.get('eat')){
-      
+    console.log('token in componentDidMount',token);
+    if(token) {
+      console.log('fire in mount')
+      UserActions.getSignedIn(token);
     }
   },
 
