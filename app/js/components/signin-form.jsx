@@ -1,5 +1,6 @@
 var React = require('react');
 var UserActions = require('../actions/user-actions');
+var Cookies = require('cookies-js');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -18,7 +19,7 @@ module.exports = React.createClass({
     event.preventDefault();
     var user = this.state;
     UserActions.signIn(user);
-    UserActions.getSignedIn('THISISATOKEN');
+    console.log(Cookies.get('eat'), 'ISTHIERECOKKOES')
     this.setState({email: '', password: ''});
   },
   render: function() {

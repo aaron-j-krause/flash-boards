@@ -21,9 +21,12 @@ module.exports = function(router, passport, appSecret) {
   });
 
   router.get('/signed-in', function(req, res) {
-    console.log(req.headers);
-    console.log(req.headers.token);
-    //var token = eat.decode(req.headers.token);
+    console.log('DOES THAT MEAN IT MADE IT',req.headers.token);
+    var token;
+    eat.decode(req.headers.token, appSecret, function(err, token) {
+      if (err) res.status(500).send({'msg': 'decode problem'});
+      console.log(token, 'in signedin route decoded');
+    });
   })
 
   router.post('/', function(req, res) {

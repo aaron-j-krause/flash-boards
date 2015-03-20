@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var isPromise = require('is-promise');
 var assign = require('object-assign');
 var Cookies = require('cookies-js');
+var UserActions = require('../actions/user-actions');
 
 var userData = [];
 
@@ -48,6 +49,7 @@ AppDispatcher.register(function(payload) {
           name: res.body.name,
           token: res.body.token
         }
+        UserActions.getSignedIn(token);
       },
       function(err){
         console.log(err);

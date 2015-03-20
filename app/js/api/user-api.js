@@ -46,7 +46,7 @@ exports.signIn = function(user) {
 }
 
 exports.getSignedIn = function(token) {
-  return new Promise(function(resolve, rejecct) {
+  return new Promise(function(resolve, reject) {
     request
       .get('/user/signed-in')
       .set('token', token)
