@@ -8,8 +8,7 @@ module.exports = React.createClass({
     }
   },
 
-  showEdit: function(event){
-    event.preventDefault();
+  showEdit: function(){
     var state = this.state;
     state.showEdit = !state.showEdit;
     this.setState(state);

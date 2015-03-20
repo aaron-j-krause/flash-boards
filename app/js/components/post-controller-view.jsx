@@ -26,7 +26,7 @@ module.exports = React.createClass({
     PostActions.getPosts();
     console.log('token in componentDidMount',token);
     if(token) {
-      console.log('fire in mount')
+      console.log('fire in mount', token)
       UserActions.getSignedIn(token);
     }
   },

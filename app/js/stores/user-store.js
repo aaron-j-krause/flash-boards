@@ -44,12 +44,10 @@ AppDispatcher.register(function(payload) {
     },
     USER_SIGN_IN: function() {
       return promise.then(function(res) {
-        console.log('signinzzz', res.body.token);
         Cookies.set('eat', res.body.token);
         session = {
           loggedIn: true
         };
-        //UserActions.getSignedIn(res.body.token);
       },
       function(err){
         console.log(err);
@@ -66,14 +64,13 @@ AppDispatcher.register(function(payload) {
       });
     },
     USER_GET_SIGNED_IN: function() {
-      console.log('hmm');
       return promise.then(function(res) {
+        console.log('RETURNED NAME', res.body.name)
         session = {
           loggedIn: true,
           name: res.body.name
         };
       }, function(err) {
-        console.log(err, 'decode err')
         session = {
           loggedIn: false
         }
@@ -84,7 +81,7 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function() {
-    console.log('how many changes');
+    console.log('EMIT CHANGE IN THEN');
     UserStore.emitChange();
   });
 
