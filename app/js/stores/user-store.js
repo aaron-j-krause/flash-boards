@@ -22,13 +22,13 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return session;
   },
   emitChange: function() {
-    this.emit('userchange');
+    this.emit('change');
   },
   addChangeListener: function(callback) {
-    this.on('userchange', callback);
+    this.on('change', callback);
   },
   removeChangeListener: function(callback) {
-    this.removeListener('userchange', callback);
+    this.removeListener('change', callback);
   }
 });
 

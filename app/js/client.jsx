@@ -6,10 +6,18 @@ var NotFoundRoute = Router.NotFoundRoute;
 var DefaultRoute = Router.DefaultRoute;
 
 var PostControllerView = require('./components/post-controller-view.jsx');
-
+var SignIn = require('./components/signin.jsx');
+var SignUp = require('./components/signup.jsx');
+var Welcome = require('./components/welcome.jsx');
+var Main = require('./components/main.jsx');
 
 var routes = (
-  <Route name="app" path="/" handler={PostControllerView}>
+  <Route name="main" path="/" handler={Main}>
+    <Route name="app" path="/home" handler={PostControllerView}/>
+    <Route name="welcome" path="/" handler={Welcome}/>
+    <Route name="signin" path="/sign-in" handler={SignIn} />
+    <Route name="signup" path="/sign-up" handler={SignUp} />
+    <DefaultRoute handler={Welcome} />
   </Route>
 );
 

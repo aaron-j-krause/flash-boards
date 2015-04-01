@@ -51,7 +51,8 @@ module.exports = React.createClass({
 
   render: function() {
     var state = getState();
-    var storeSession = UserStore.getSession()
+    var storeSession = UserStore.getSession();
+    if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
     return (
       <div>
         <header></header>
