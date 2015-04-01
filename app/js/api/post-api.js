@@ -1,3 +1,5 @@
+'use strict';
+
 var Promise = require('promise');
 var PostActions = require('../actions/post-actions');
 var request = require('superagent');

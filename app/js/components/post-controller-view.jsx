@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var Router = require('react-router');
@@ -33,9 +35,7 @@ module.exports = React.createClass({
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     PostActions.getPosts();
-    console.log('token in componentDidMount',token);
     if(token) {
-      console.log('fire in mount', token)
       UserActions.getSignedIn(token);
     }
   },
@@ -53,6 +53,7 @@ module.exports = React.createClass({
     var state = getState();
     var storeSession = UserStore.getSession();
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
+
     return (
       <div>
         <header></header>

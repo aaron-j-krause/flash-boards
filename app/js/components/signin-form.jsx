@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var UserActions = require('../actions/user-actions');
 var Cookies = require('cookies-js');

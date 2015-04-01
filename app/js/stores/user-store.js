@@ -1,3 +1,5 @@
+'use strict';
+
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var isPromise = require('is-promise');
@@ -65,7 +67,6 @@ AppDispatcher.register(function(payload) {
     },
     USER_GET_SIGNED_IN: function() {
       return promise.then(function(res) {
-        console.log('RETURNED NAME', res.body.name)
         session = {
           loggedIn: true,
           name: res.body.name
@@ -81,7 +82,6 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function() {
-    console.log('EMIT CHANGE IN THEN');
     UserStore.emitChange();
   });
 
