@@ -15,11 +15,10 @@ var Main = require('./components/main.jsx');
 
 var routes = (
   <Route name="main" path="/" handler={Main}>
+    <DefaultRoute handler={Welcome} />
     <Route name="app" path="/home" handler={PostControllerView}/>
-    <Route name="welcome" path="/" handler={Welcome}/>
     <Route name="signin" path="/sign-in" handler={SignIn} />
     <Route name="signup" path="/sign-up" handler={SignUp} />
-    <DefaultRoute handler={Welcome} />
   </Route>
 );
 
