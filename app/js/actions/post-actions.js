@@ -1,3 +1,5 @@
+'use strict';
+
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var PostAPI = require('../api/post-api.js');
 

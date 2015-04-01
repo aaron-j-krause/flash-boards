@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var PostActions = require('../actions/post-actions');
 var UserActions = require('../actions/user-actions');

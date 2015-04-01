@@ -21,11 +21,12 @@ module.exports = function(router, passport, appSecret) {
   });
 
   router.get('/signed-in', function(req, res) {
-    console.log('DOES THAT MEAN IT MADE IT',req.headers.token);
-    var token;
     eat.decode(req.headers.token, appSecret, function(err, token) {
-      if (err) res.status(500).send({'msg': 'decode problem'});
-      console.log(token, 'in signedin route decoded');
+      if (err) return res.status(500).send({'msg': 'decode problem'});
+      User.findById(token.id, function(err, user) {
+        if (err) return res.status(500).send({'msg': 'could not find user'});
+        res.json({name: user.name});
+      })
     });
   })
 

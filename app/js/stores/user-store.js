@@ -1,3 +1,5 @@
+'use strict';
+
 var AppDispatcher = require('../dispatcher/app-dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var isPromise = require('is-promise');
@@ -18,16 +20,17 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return userData;
   },
   getSession: function() {
+    console.log('get session', session);
     return session;
   },
   emitChange: function() {
-    this.emit('userchange');
+    this.emit('change');
   },
   addChangeListener: function(callback) {
-    this.on('userchange', callback);
+    this.on('change', callback);
   },
   removeChangeListener: function(callback) {
-    this.removeListener('userchange', callback);
+    this.removeListener('change', callback);
   }
 });
 
@@ -45,11 +48,8 @@ AppDispatcher.register(function(payload) {
       return promise.then(function(res) {
         Cookies.set('eat', res.body.token);
         session = {
-          loggedIn: true,
-          name: res.body.name,
-          token: res.body.token
-        }
-        UserActions.getSignedIn(token);
+          loggedIn: true
+        };
       },
       function(err){
         console.log(err);
@@ -57,13 +57,25 @@ AppDispatcher.register(function(payload) {
           loggedIn: false,
           error: 'Incorrect login information'
         };
-      })
+      });
     },
     USER_SIGN_OUT: function() {
       return promise.then(function() {
         resetSession();
         Cookies.set('eat', '');
-      })
+      });
+    },
+    USER_GET_SIGNED_IN: function() {
+      return promise.then(function(res) {
+        session = {
+          loggedIn: true,
+          name: res.body.name
+        };
+      }, function(err) {
+        session = {
+          loggedIn: false
+        }
+      });
     }
   };
 

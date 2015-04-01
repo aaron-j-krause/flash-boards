@@ -1,8 +1,15 @@
+'use strict';
+
 var React = require('react');
 var UserActions = require('../actions/user-actions');
 var Cookies = require('cookies-js');
+var Link = require('react-router').Link;
 
 module.exports = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function(){
     return {
       email: '',
@@ -19,8 +26,11 @@ module.exports = React.createClass({
     event.preventDefault();
     var user = this.state;
     UserActions.signIn(user);
-    console.log(Cookies.get('eat'), 'ISTHIERECOKKOES')
     this.setState({email: '', password: ''});
+    setTimeout(function(){
+      this.context.router.transitionTo('/home');
+    }.bind(this), 1000);
+
   },
   render: function() {
     return (

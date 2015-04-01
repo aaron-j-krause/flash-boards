@@ -1,4 +1,11 @@
+'use strict';
+
 var React = require('react');
+
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+
+
 var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
 var PostStore = require('../stores/post-store');
@@ -15,16 +22,21 @@ function getState(){
 };
 
 module.exports = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function(){
     return getState();
   },
 
   componentDidMount: function(){
+    var token = Cookies.get('eat');
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     PostActions.getPosts();
-    if(Cookies.get('eat')){
-      
+    if(token) {
+      UserActions.getSignedIn(token);
     }
   },
 
@@ -39,12 +51,15 @@ module.exports = React.createClass({
 
   render: function() {
     var state = getState();
-    var storeSession = UserStore.getSession()
+    var storeSession = UserStore.getSession();
+    if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
+
     return (
       <div>
         <header></header>
         <main>
           <PostList postData={this.state.postData} sessionData={this.state.session}/>
+          <RouteHandler params={this.props.params}/>
         </main>
         <Footer sessionData={this.state.session}/>
       </div>
