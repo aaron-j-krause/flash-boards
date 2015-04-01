@@ -1,4 +1,9 @@
 var React = require('react');
+
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+
+
 var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
 var PostStore = require('../stores/post-store');
@@ -15,6 +20,10 @@ function getState(){
 };
 
 module.exports = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function(){
     return getState();
   },
@@ -48,6 +57,7 @@ module.exports = React.createClass({
         <header></header>
         <main>
           <PostList postData={this.state.postData} sessionData={this.state.session}/>
+          <RouteHandler params={this.props.params}/>
         </main>
         <Footer sessionData={this.state.session}/>
       </div>
