@@ -9,4 +9,4 @@ module.exports = React.createClass({
       <RouteHandler />
     );
   }
-})
+});

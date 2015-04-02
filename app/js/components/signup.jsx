@@ -9,8 +9,9 @@ module.exports = React.createClass({
     return (
       <div className='welcome'>
         <h1>SIGN UP OR SOMETHING</h1>
-
-        <Link to="app"><button>Sign Up!</button></Link>
+        <Link to="app">
+          <button>Sign Up!</button>
+        </Link>
       </div>
     );
   }

@@ -9,11 +9,13 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {createdPost:{body: '', user: this.props.sessionData.name}}
   },
+
   handleChange: function(event) {
     var post = this.state.createdPost;
     post.body = event.target.value;
     this.setState({createdPost: post});
   },
+
   handleSubmit: function(event){
     event.preventDefault();
     var createdPost = this.state.createdPost;
@@ -24,12 +26,13 @@ module.exports = React.createClass({
     var state = this.state;
     state.createdPost.body = '';
     this.setState(state);
-
   },
+
   signOut: function(event) {
     event.preventDefault();
     UserActions.signOut(this.props.sessionData.name);
   },
+
   render: function() {
     return (
       <form name="create-post" method="POST" className="create-post-form"
