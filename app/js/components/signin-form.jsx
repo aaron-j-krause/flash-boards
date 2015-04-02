@@ -16,12 +16,14 @@ module.exports = React.createClass({
       password: ''
     }
   },
+
   handleChange: function(event){
     var field = event.target.placeholder;
     var state = this.state;
     state[field] = event.target.value;
     this.setState(state);
   },
+
   handleSubmit: function(event){
     event.preventDefault();
     var user = this.state;
@@ -30,8 +32,8 @@ module.exports = React.createClass({
     setTimeout(function(){
       this.context.router.transitionTo('/home');
     }.bind(this), 1000);
-
   },
+
   render: function() {
     return (
       <form name="sign-in" onSubmit={this.handleSubmit}>

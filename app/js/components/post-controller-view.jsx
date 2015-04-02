@@ -5,7 +5,6 @@ var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 
-
 var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
 var PostStore = require('../stores/post-store');
