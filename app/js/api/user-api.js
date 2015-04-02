@@ -32,20 +32,20 @@ exports.createNewUser = function(user) {
 };
 
 exports.signOut = function(name) {
-  return Promise.resolve(name)
-}
+  return Promise.resolve(name);
+};
 
 exports.signIn = function(user) {
-  return new Promise(function(resolve, reject){
+  return new Promise(function(resolve, reject) {
     request
       .get('/user/signin')
       .auth(user.email, user.password)
-      .end(function(err, res){
-        if(err) reject(err);
+      .end(function(err, res) {
+        if (err) reject(err);
         else resolve(res);
       });
   });
-}
+};
 
 exports.getSignedIn = function(token) {
   return new Promise(function(resolve, reject) {
@@ -57,4 +57,4 @@ exports.getSignedIn = function(token) {
         else resolve(res);
       });
   });
-}
+};

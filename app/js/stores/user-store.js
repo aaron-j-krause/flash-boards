@@ -9,7 +9,7 @@ var UserActions = require('../actions/user-actions');
 
 var userData = [];
 
-var session = {loggedIn: false}
+var session = {loggedIn: false};
 
 function resetSession() {
   session = {loggedIn: false};
@@ -51,7 +51,7 @@ AppDispatcher.register(function(payload) {
           loggedIn: true
         };
       },
-      function(err){
+      function(err) {
         console.log(err);
         session = {
           loggedIn: false,
@@ -74,7 +74,7 @@ AppDispatcher.register(function(payload) {
       }, function(err) {
         session = {
           loggedIn: false
-        }
+        };
       });
     }
   };

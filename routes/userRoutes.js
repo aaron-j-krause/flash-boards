@@ -13,12 +13,12 @@ module.exports = function(router, passport, appSecret) {
   });
 
   router.get('/signin', passport.authenticate('basic', {session: false}),
-    function(req, res){
-      req.user.generateToken(appSecret, function(err, token){
+    function(req, res) {
+      req.user.generateToken(appSecret, function(err, token) {
         if (err) res.status(500).send({'msg':'could not generate token'});
         res.json({token: token, name: req.user.name});
       });
-  });
+    });
 
   router.get('/signed-in', function(req, res) {
     eat.decode(req.headers.token, appSecret, function(err, token) {
@@ -26,9 +26,9 @@ module.exports = function(router, passport, appSecret) {
       User.findById(token.id, function(err, user) {
         if (err) return res.status(500).send({'msg': 'could not find user'});
         res.json({name: user.name});
-      })
+      });
     });
-  })
+  });
 
   router.post('/', function(req, res) {
     var newUser = new User({name: req.body.name});

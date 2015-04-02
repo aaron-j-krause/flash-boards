@@ -37,6 +37,6 @@ userSchema.methods.generateToken = function(appSecret, callback) {
   return eat.encode({id: this._id, timestamp: new Date()}, appSecret, callback);
 };
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);
