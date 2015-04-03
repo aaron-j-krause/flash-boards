@@ -70,5 +70,14 @@ describe('Thread API', function() {
       });
   });
 
-  it('should delete a thread');
+  it('should delete a thread', function(done) {
+    chai.request('localhost:3000')
+      .del('/threads/' + delThreadId)
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.subject).to.eql('testdeletethread');
+        done();
+      })
+  });
 });
