@@ -1,3 +1,4 @@
+'use strict';
 process.env.MONGO_URI = 'mongodb://localhost/test_db';
 process.env.TEST_MODE = true;
 require('../server');
@@ -6,10 +7,9 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 var expect = chai.expect;
 var mongoose = require('mongoose');
-var User = require('../models/userSchema');
 chai.use(chaihttp);
 
-describe('User API', function() {
+describe('Post API', function() {
   var userId;
   var editPostId;
   var delPostId;

@@ -5,8 +5,9 @@ var app = express();
 
 var assignPassportBasic = require('./lib/basic-strategy');
 
-var assignUserRoutes = require('./routes/userRoutes');
-var assignPostRoutes = require('./routes/postRoutes');
+var assignUserRoutes = require('./routes/user-routes');
+var assignPostRoutes = require('./routes/post-routes');
+var assignThreadRoutes = require('./routes/thread-routes');
 
 //middleware
 var morgan = require('morgan');
@@ -23,12 +24,15 @@ app.use(bodyParser.json());
 //routes
 var userRouter = express.Router();
 var postRouter = express.Router();
+var threadRouter = express.Router();
 
 assignPostRoutes(postRouter);
 assignUserRoutes(userRouter, passport, app.get('appSecret'));
+assignThreadRoutes(threadRouter);
 
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
+app.use('/threads', threadRouter);
 app.use(express.static(__dirname + '/build'));
 
 //db

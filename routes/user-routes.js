@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/userSchema');
+var User = require('../models/user-model');
 var eat = require('eat');
 
 module.exports = function(router, passport, appSecret) {
@@ -37,7 +37,6 @@ module.exports = function(router, passport, appSecret) {
     newUser.basic.password = newUser.generateHash(req.body.password);
 
     newUser.save(function(err, user) {
-      console.log(err);
       if (err) return res.status(500).send({msg: 'could not create user'});
 
       user.generateToken(appSecret, function(err, token) {
