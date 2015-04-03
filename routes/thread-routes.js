@@ -4,8 +4,8 @@ var Post = require('../models/post-model');
 var Thread = require('../models/thread-model');
 
 module.exports = function(router) {
-  router.post('/', function( res) {
-    newThread = new Thread({
+  router.post('/', function(req, res) {
+    var newThread = new Thread({
       author: req.body.author,
       subject: req.body.subject
     });

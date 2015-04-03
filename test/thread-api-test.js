@@ -16,7 +16,19 @@ describe('Thread API', function() {
       done();
     });
   });
-  it('should create a thread');
+  it('should create a thread', function(done) {
+    chai.request('localhost:3000')
+      .post('/threads/')
+      .send({author: 'testuser',
+        subject:'testsubject',
+        users:['testtagone', 'testtagtwo']
+      }).end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.author).to.eql('testuser');
+        done();
+      })
+  });
   it('should add users to a thread');
   it('should delete a thread');
 });
