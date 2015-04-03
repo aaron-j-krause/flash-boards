@@ -1,10 +1,9 @@
-var Post = require('../models/postSchema');
-var User = require('../models/userSchema');
+var Post = require('../models/post-model');
+var User = require('../models/user-model');
 
 module.exports = function(router) {
   //on base route /posts
   router.post('/', function(req, res) {
-    console.log('ROUTE', req.body);
     var post = new Post({body: req.body.body, user: req.body.user});
     User.findOne({name: req.body.user}, function(err, user) {
       if (err || user === null)

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/userSchema');
+var User = require('../models/user-model');
 var eat = require('eat');
 
 module.exports = function(router, passport, appSecret) {
