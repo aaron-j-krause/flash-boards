@@ -2,7 +2,6 @@
 
 var React = require('react');
 var PostActions = require('../actions/post-actions');
-var request = require('superagent');
 
 module.exports = React.createClass({
   getInitialState: function() {

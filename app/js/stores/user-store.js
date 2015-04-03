@@ -6,6 +6,7 @@ var isPromise = require('is-promise');
 var assign = require('object-assign');
 var Cookies = require('cookies-js');
 var UserActions = require('../actions/user-actions');
+var NavEmitter = require('./navigation-emitter');
 
 var userData = [];
 
@@ -50,6 +51,8 @@ AppDispatcher.register(function(payload) {
         session = {
           loggedIn: true
         };
+        console.log('USER STORE')
+        NavEmitter.emitNav();
       },
       function(err) {
         console.log(err);

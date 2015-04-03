@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Link = require('react-router').Link;
-
+//linked to by welcome
 module.exports = React.createClass({
   render: function() {
     return (
