@@ -6,6 +6,7 @@ var isPromise = require('is-promise');
 var assign = require('object-assign');
 var Cookies = require('cookies-js');
 var UserActions = require('../actions/user-actions');
+var NavEmitter = require('./navigation-emitter');
 
 var userData = [];
 
@@ -20,7 +21,6 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return userData;
   },
   getSession: function() {
-    console.log('get session', session);
     return session;
   },
   emitChange: function() {
@@ -44,13 +44,16 @@ AppDispatcher.register(function(payload) {
         console.log(res.body);
       });
     },
+
     USER_SIGN_IN: function() {
       return promise.then(function(res) {
         Cookies.set('eat', res.body.token);
         session = {
           loggedIn: true
         };
+        NavEmitter.emitChange();
       },
+
       function(err) {
         console.log(err);
         session = {
@@ -59,12 +62,14 @@ AppDispatcher.register(function(payload) {
         };
       });
     },
+
     USER_SIGN_OUT: function() {
       return promise.then(function() {
         resetSession();
         Cookies.set('eat', '');
       });
     },
+
     USER_GET_SIGNED_IN: function() {
       return promise.then(function(res) {
         session = {
