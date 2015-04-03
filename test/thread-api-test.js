@@ -11,11 +11,35 @@ var expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Thread API', function() {
+  var delThreadId;
+  var putThreadId;
+
+  before(function(done) {
+    chai.request('localhost:3000')
+      .post('/threads/')
+      .send({
+        author: 'testuser',
+        subject: 'testdeletethread'
+      }).end(function(err, res) {
+        delThreadId = res.body._id;
+        chai.request('localhost:3000')
+          .post('/threads/')
+          .send({
+            author: 'testuser',
+            subject: 'testputthread'
+          }).end(function(err, res) {
+            putThreadId = res.body._id;
+            done();
+        });
+      });
+  });
+
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
       done();
     });
   });
+
   it('should create a thread', function(done) {
     chai.request('localhost:3000')
       .post('/threads/')
@@ -27,8 +51,9 @@ describe('Thread API', function() {
         expect(res).to.have.status(200);
         expect(res.body.author).to.eql('testuser');
         done();
-      })
+      });
   });
+
   it('should add users to a thread');
   it('should delete a thread');
 });

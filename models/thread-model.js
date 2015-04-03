@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var threadSchema = mongoose.Schema({
   author: String,
   authorId: mongoose.Schema.Types.ObjectId,
-  users: [String],
+  users: {type: [String], default: []},
   subject: String
 });
 
