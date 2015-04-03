@@ -37,7 +37,6 @@ module.exports = function(router, passport, appSecret) {
     newUser.basic.password = newUser.generateHash(req.body.password);
 
     newUser.save(function(err, user) {
-      console.log(err);
       if (err) return res.status(500).send({msg: 'could not create user'});
 
       user.generateToken(appSecret, function(err, token) {
