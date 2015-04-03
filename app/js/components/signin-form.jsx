@@ -42,7 +42,6 @@ module.exports = React.createClass({
   },
 
   handleNav: function() {
-    console.log('NAVIGATE HANDLER')
     this.context.router.transitionTo('/home');
   },
 
