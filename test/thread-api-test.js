@@ -43,7 +43,8 @@ describe('Thread API', function() {
   it('should create a thread', function(done) {
     chai.request('localhost:3000')
       .post('/threads/')
-      .send({author: 'testuser',
+      .send({
+        author: 'testuser',
         subject:'testsubject',
         users:['testtagone', 'testtagtwo']
       }).end(function(err, res) {
@@ -54,6 +55,20 @@ describe('Thread API', function() {
       });
   });
 
-  it('should add users to a thread');
+  it('should add users to a thread', function(done) {
+    chai.request('localhost:3000')
+      .put('/threads/tags')
+      .send({
+        id: putThreadId,
+        users: ['testtagone', 'testtagtwo']
+      }).end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.users).to.include('testtagone');
+        expect(res.body.users).to.have.length(2);
+        done();
+      });
+  });
+
   it('should delete a thread');
 });
