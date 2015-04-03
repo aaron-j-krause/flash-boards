@@ -21,7 +21,6 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return userData;
   },
   getSession: function() {
-    console.log('get session', session);
     return session;
   },
   emitChange: function() {
@@ -52,7 +51,7 @@ AppDispatcher.register(function(payload) {
         session = {
           loggedIn: true
         };
-        NavEmitter.emitNav();
+        NavEmitter.emitChange();
       },
 
       function(err) {

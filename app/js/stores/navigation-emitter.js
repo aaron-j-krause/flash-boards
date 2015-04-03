@@ -4,15 +4,15 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 module.exports = assign({}, EventEmitter.prototype, {
-  emitNav: function() {
-    this.emit('navigate');
+  emitChange: function() {
+    this.emit('change');
   },
 
-  addNavListener: function(callback) {
-    this.on('navigate', callback);
+  addChangeListener: function(callback) {
+    this.on('change', callback);
   },
 
-  removeNavListener: function(callback) {
-    this.removeListener('navigate', callback);
+  removeChangeListener: function(callback) {
+    this.removeListener('change', callback);
   }
 });

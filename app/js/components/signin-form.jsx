@@ -20,11 +20,11 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    NavEmitter.addNavListener(this.handleNav);
+    NavEmitter.addChangeListener(this.handleNav);
   },
 
   componentWillUnmount: function() {
-    NavEmitter.removeNavListener(this.handleNav)
+    NavEmitter.removeChangeListener(this.handleNav)
   },
 
   handleChange: function(event) {
