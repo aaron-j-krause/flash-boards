@@ -30,7 +30,7 @@ describe('Thread API', function() {
           }).end(function(err, res) {
             putThreadId = res.body._id;
             done();
-        });
+          });
       });
   });
 
@@ -78,6 +78,6 @@ describe('Thread API', function() {
         expect(res).to.have.status(200);
         expect(res.body.subject).to.eql('testdeletethread');
         done();
-      })
+      });
   });
 });
