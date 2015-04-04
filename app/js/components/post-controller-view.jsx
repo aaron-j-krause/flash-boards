@@ -7,6 +7,7 @@ var RouteHandler = Router.RouteHandler;
 
 var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
+var Header = require('./header.jsx');
 var PostStore = require('../stores/post-store');
 var PostActions = require('../actions/post-actions');
 var UserStore = require('../stores/user-store');
@@ -55,10 +56,11 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <header></header>
+        <Header/>
         <main>
           <PostList postData={this.state.postData} sessionData={this.state.session}/>
-          <RouteHandler params={this.props.params}/>
+          <RouteHandler params={this.props.params} postData={this.state.postData}
+            sessionData={this.state.session}/>
         </main>
         <Footer sessionData={this.state.session}/>
       </div>
