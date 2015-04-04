@@ -58,7 +58,6 @@ module.exports = React.createClass({
       <div>
         <Header/>
         <main>
-          <PostList postData={this.state.postData} sessionData={this.state.session}/>
           <RouteHandler params={this.props.params} postData={this.state.postData}
             sessionData={this.state.session}/>
         </main>

@@ -7,6 +7,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <header>
+        <Link to="profile">Profile</Link>
         <Link to="thread">Thread</Link>
       </header>
     );
