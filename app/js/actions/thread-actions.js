@@ -21,5 +21,21 @@ module.exports = {
       actionType: 'THREAD_GET_BY_USER',
       promise: promise
     });
+  },
+
+  getThreadById: function(id) {
+    var promise = ThreadAPI.getThreadById(id);
+    AppDispatcher.handleAction({
+      actionType: 'THREAD_GET_BY_ID',
+      promise: promise
+    });
+  },
+
+  updateLocalThread: function(post) {
+    var promise = ThreadAPI.updateLocal(post);
+    AppDispatcher.handleAction({
+      actionType: 'THREAD_UPDATE_LOCAL',
+      promise: promise
+    });
   }
-}
+};

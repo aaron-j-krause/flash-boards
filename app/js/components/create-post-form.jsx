@@ -2,7 +2,8 @@
 
 var React = require('react');
 var PostActions = require('../actions/post-actions');
-
+var ThreadActions = require('../actions/thread-actions');
+//child of footer
 module.exports = React.createClass({
   getInitialState: function(){
     return {createdPost:{body: ''}}
@@ -17,8 +18,10 @@ module.exports = React.createClass({
   handleSubmit: function(event){
     event.preventDefault();
     var createdPost = this.state.createdPost;
-    createdPost.user = this.props.sessionData.name
+    createdPost.user = this.props.sessionData.name;
+    createdPost.threadId = this.props.threadId;
     PostActions.createPost(createdPost);
+    ThreadActions.updateLocalThread(createdPost);
 
     this.setState({createdPost: {body: ''}});
   },

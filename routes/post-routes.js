@@ -4,7 +4,7 @@ var User = require('../models/user-model');
 module.exports = function(router) {
   //on base route /posts
   router.post('/', function(req, res) {
-    var post = new Post({body: req.body.body, user: req.body.user});
+    var post = new Post(req.body);
     User.findOne({name: req.body.user}, function(err, user) {
       if (err || user === null)
         return res.status(500).send('Could not find user');

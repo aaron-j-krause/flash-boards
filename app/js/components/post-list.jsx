@@ -5,7 +5,7 @@ var Post = require('./post.jsx');
 
 module.exports = React.createClass({
   render: function() {
-    var posts = this.props.postData.map(function(post){
+    var posts = this.props.postData.posts.map(function(post){
       return (
         <Post postData={post} key={post._id} url={this.props.url}
           sessionData={this.props.sessionData}/>
@@ -13,7 +13,7 @@ module.exports = React.createClass({
     }.bind(this));
     return (
       <div>
-        <header>THIS IS A THREAD</header>
+        <header>{this.props.postData.thread.subject}</header>
         <ul className='post-list'>
           {posts}
         </ul>

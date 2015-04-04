@@ -18,7 +18,7 @@ var Cookies = require('cookies-js');
 
 function getState(){
   return {
-    postData: PostStore.getPosts(),
+    postData: ThreadStore.getCurrentThread(),
     session: UserStore.getSession(),
     threadData: ThreadStore.getUserThreads()
   };
@@ -58,6 +58,8 @@ module.exports = React.createClass({
   render: function() {
     var state = getState();
     var storeSession = UserStore.getSession();
+    var threadId = this.state.postData.thread ? this.state.postData.thread._id : '';
+    console.log(this.state.postData,'HAS POSOSOST??')
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
 
     return (
@@ -67,7 +69,7 @@ module.exports = React.createClass({
           <RouteHandler params={this.props.params} postData={this.state.postData}
             sessionData={this.state.session} threadData={this.state.threadData}/>
         </main>
-        <Footer sessionData={this.state.session}/>
+        <Footer threadId={threadId} sessionData={this.state.session}/>
       </div>
     )
   }

@@ -25,11 +25,21 @@ exports.createNewThread = function(thread) {
 };
 
 exports.getThreadsByUser = function(user) {
-  var url = '/threads/radguy';
+  var url = '/threads/titles/radguy';
   var promise = makePromise('GET', url, null);
   return promise.catch(function(err) {
     console.log(err);
   });
 };
 
-exports.getThreads = function(){};
+exports.getThreadById = function(id) {
+  var url ='/threads/' + id;
+  var promise = makePromise('GET', url, null);
+  return promise.catch(function(err) {
+    console.log(err);
+  });
+};
+
+exports.updateLocal = function(post) {
+  return Promise.resolve(post);
+}

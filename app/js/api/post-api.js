@@ -25,6 +25,7 @@ exports.getAllPosts = function() {
 };
 
 exports.createNewPost = function(post) {
+  console.log('IN API', post);
   var promise = makePromise('POST', '/posts/', post);
   return promise.catch(function(err) {
     console.log(err);

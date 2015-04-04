@@ -61,6 +61,7 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function() {
+    console.log('POST CHANGE');
     PostStore.emitChange();
   });
 

@@ -6,7 +6,7 @@ var assign = require('object-assign');
 var UserActions = require('../actions/user-actions');
 var NavEmitter = require('./navigation-emitter');
 
-var currentThread;
+var currentThread = [];
 var userThreads = [];
 
 var ThreadStore = assign({}, EventEmitter.prototype, {
@@ -38,7 +38,6 @@ AppDispatcher.register(function(payload) {
   var handlers = {
     'THREAD_CREATE': function() {
       return promise.then(function(res) {
-        console.log(res.body);
         currentThread = res.body;
       })
     },
@@ -46,6 +45,19 @@ AppDispatcher.register(function(payload) {
     'THREAD_GET_BY_USER': function() {
       return promise.then(function(res) {
         userThreads = res.body;
+      });
+    },
+
+    'THREAD_GET_BY_ID': function() {
+      return promise.then(function(res) {
+        currentThread = res.body;
+      });
+    },
+
+    'THREAD_UPDATE_LOCAL': function() {
+      console.log('THREAD UPDATE')
+      return promise.then(function(res) {
+        currentThread.push(res);
       })
     }
   }
@@ -53,6 +65,7 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function(){
+    console.log('THREAD CHANGE');
     ThreadStore.emitChange()
   });
 
