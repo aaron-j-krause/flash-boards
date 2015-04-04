@@ -20,7 +20,8 @@ function getState(){
     postData: PostStore.getPosts(),
     session: UserStore.getSession(),
     threadList: ThreadStore.getUserThreads(),
-    threadSubject: ThreadStore.getCurrentSubject()
+    threadSubject: ThreadStore.getCurrentSubject(),
+    currentThread: ThreadStore.getCurrentThread()
   };
 };
 
@@ -57,7 +58,7 @@ module.exports = React.createClass({
   render: function() {
     var state = getState();
     var storeSession = UserStore.getSession();
-    var threadId = this.state.postData.thread ? this.state.postData.thread._id : '';
+    var threadId = this.state.currentThread._id || '';
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
     //routes to profile-page and post-list
     return (

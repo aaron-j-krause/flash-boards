@@ -6,7 +6,7 @@ var CreatePostForm = require('./create-post-form.jsx');
 var CreateThreadForm = require('./create-thread-form.jsx');
 var Cookies = require('cookies-js');
 //child of post-controller-view
-module.exports = React.createClass({
+var Footer = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -24,3 +24,6 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Footer;
+ 

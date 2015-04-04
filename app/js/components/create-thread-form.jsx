@@ -2,10 +2,27 @@
 
 var React = require('react');
 var ThreadActions = require('../actions/thread-actions');
+var NavEmitter = require('../stores/navigation-emitter');
 
 module.exports = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function(){
     return {createdThread:{subject: ''}}
+  },
+
+  componentDidMount: function() {
+    NavEmitter.addChangeListener(this._nav);
+  },
+
+  componentWillUnmount: function() {
+    NavEmitter.removeChangeListener(this._nav);
+  },
+
+  _nav: function() {
+    this.context.router.transitionTo('/thread');
   },
 
   handleChange: function(event) {
@@ -19,6 +36,7 @@ module.exports = React.createClass({
     var createdThread = this.state.createdThread;
     createdThread.author = this.props.sessionData.name;
     ThreadActions.createThread(createdThread);
+    ThreadActions.setCurrentSubject(createdThread.subject)
     this.setState({createdThread:{subject: ''}});
   },
 

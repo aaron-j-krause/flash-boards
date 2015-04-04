@@ -3,10 +3,24 @@
 var React = require('react');
 var PostActions = require('../actions/post-actions');
 var ThreadActions = require('../actions/thread-actions');
+var NavEmitter = require('../stores/navigation-emitter');
+
 //child route of post-controller-view
 var ProfilePage = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
+  },
+
+  componentDidMount: function() {
+    NavEmitter.addChangeListener(this._nav);
+  },
+
+  componentWillUnmount: function() {
+    NavEmitter.removeChangeListener(this._nav);
+  },
+
+  _nav: function() {
+    this.context.router.transitionTo('/thread')
   },
 
   handleClick: function(event) {
