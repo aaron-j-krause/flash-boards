@@ -3,9 +3,10 @@
 var React = require('react');
 var SignInForm = require('./signin-form.jsx');
 var CreatePostForm = require('./create-post-form.jsx');
+var CreateThreadForm = require('./create-thread-form.jsx');
 var Cookies = require('cookies-js');
-
-module.exports = React.createClass({
+//child of post-controller-view
+var Footer = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -13,7 +14,8 @@ module.exports = React.createClass({
   render: function() {
     var session = this.props.sessionData;
     var path = this.context.router.getCurrentPathname();
-    var form = path === '/thread' ? <CreatePostForm sessionData={session}/> : '';
+    var form = path === '/thread' ? <CreatePostForm sessionData={session} threadId={this.props.threadId}/> :
+      <CreateThreadForm sessionData={session}/>;
 
     return (
       <footer>
@@ -22,3 +24,6 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Footer;
+ 

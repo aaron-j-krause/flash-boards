@@ -3,7 +3,8 @@
 var React = require('react');
 var Post = require('./post.jsx');
 
-module.exports = React.createClass({
+//child of controller view routed to by links in header
+var PostList = React.createClass({
   render: function() {
     var posts = this.props.postData.map(function(post){
       return (
@@ -13,7 +14,7 @@ module.exports = React.createClass({
     }.bind(this));
     return (
       <div>
-        <header>THIS IS A THREAD</header>
+        <header>{this.props.threadSubject}</header>
         <ul className='post-list'>
           {posts}
         </ul>
@@ -21,3 +22,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = PostList;

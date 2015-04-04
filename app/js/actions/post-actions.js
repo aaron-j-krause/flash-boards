@@ -31,8 +31,8 @@ module.exports = {
     });
   },
 
-  getPosts: function() {
-    var promise = PostAPI.getAllPosts();
+  getPosts: function(id) {
+    var promise = PostAPI.getPostsByThreadId(id);
     AppDispatcher.handleAction({
       actionType: 'POST_GET_ALL',
       promise: promise
