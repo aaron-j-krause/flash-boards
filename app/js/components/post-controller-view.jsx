@@ -12,12 +12,15 @@ var PostStore = require('../stores/post-store');
 var PostActions = require('../actions/post-actions');
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
+var ThreadStore = require('../stores/thread-store');
+var ThreadActions = require('../actions/thread-actions');
 var Cookies = require('cookies-js');
 
 function getState(){
   return {
     postData: PostStore.getPosts(),
-    session: UserStore.getSession()
+    session: UserStore.getSession(),
+    threadData: ThreadStore.getUserThreads()
   };
 };
 
@@ -34,15 +37,18 @@ module.exports = React.createClass({
     var token = Cookies.get('eat');
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
+    ThreadStore.addChangeListener(this._onChange);
     PostActions.getPosts();
+    ThreadActions.getThreadsByUser();
     if(token) {
       UserActions.getSignedIn(token);
     }
   },
 
   componentWillUnmount: function() {
-    PostStore.removeChangeListener(this._onChange)
-    UserStore.removeChangeListener(this._onChange)
+    PostStore.removeChangeListener(this._onChange);
+    UserStore.removeChangeListener(this._onChange);
+    ThreadStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
@@ -59,7 +65,7 @@ module.exports = React.createClass({
         <Header sessionData={this.state.session}/>
         <main>
           <RouteHandler params={this.props.params} postData={this.state.postData}
-            sessionData={this.state.session}/>
+            sessionData={this.state.session} threadData={this.state.threadData}/>
         </main>
         <Footer sessionData={this.state.session}/>
       </div>

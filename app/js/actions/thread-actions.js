@@ -13,5 +13,13 @@ module.exports = {
       actionType: 'THREAD_CREATE',
       promise: promise
     });
+  },
+
+  getThreadsByUser: function(user) {
+    var promise = ThreadAPI.getThreadsByUser(user);
+    AppDispatcher.handleAction({
+      actionType: 'THREAD_GET_BY_USER',
+      promise: promise
+    });
   }
 }

@@ -21,5 +21,15 @@ exports.createNewThread = function(thread) {
   var promise = makePromise('POST', '/threads/', thread);
   return promise.catch(function(err) {
     console.log(err);
-  })
-}
+  });
+};
+
+exports.getThreadsByUser = function(user) {
+  var url = '/threads/radguy';
+  var promise = makePromise('GET', url, null);
+  return promise.catch(function(err) {
+    console.log(err);
+  });
+};
+
+exports.getThreads = function(){};

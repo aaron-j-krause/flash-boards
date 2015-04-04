@@ -30,4 +30,19 @@ module.exports = function(router) {
       res.send(thread);
     });
   });
+
+  router.get('/:user', function(req, res) {
+    Thread.find({author: req.params.user}, 'subject', function(err, titles){
+      if (err) return res.status(500).send({msg: 'could not find threads'});
+      res.json(titles);
+    });
+  });
+
+  router.get('/all', function(req, res) {
+    Thread.find({}, function(err, titles) {
+      if (err) return res.status(500).send({msg: 'could not find threads'});
+      console.log(titles)
+      res.send(titles);
+    });
+  });
 };
