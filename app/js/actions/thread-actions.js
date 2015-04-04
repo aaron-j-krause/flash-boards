@@ -37,5 +37,13 @@ module.exports = {
       actionType: 'THREAD_UPDATE_LOCAL',
       promise: promise
     });
+  },
+
+  setCurrentSubject: function(subject) {
+    var promise = ThreadAPI.setSubject(subject);
+    AppDispatcher.handleAction({
+      actionType: 'THREAD_SET_CURRENT_SUBJECT',
+      promise: promise
+    })
   }
 };

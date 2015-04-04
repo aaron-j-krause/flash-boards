@@ -4,7 +4,7 @@ var React = require('react');
 var PostActions = require('../actions/post-actions');
 var ThreadActions = require('../actions/thread-actions');
 //child route of post-controller-view
-module.exports = React.createClass({
+var ProfilePage = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -12,6 +12,8 @@ module.exports = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
     ThreadActions.getThreadById(event.target.dataset.id);
+    PostActions.getPosts(event.target.dataset.id);
+    ThreadActions.setCurrentSubject(event.target.text);
   },
 
   render: function() {
@@ -32,4 +34,6 @@ module.exports = React.createClass({
       </div>
     );
   }
-})
+});
+
+module.exports = ProfilePage;

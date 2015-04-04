@@ -21,7 +21,6 @@ module.exports = React.createClass({
     createdPost.user = this.props.sessionData.name;
     createdPost.threadId = this.props.threadId;
     PostActions.createPost(createdPost);
-    ThreadActions.updateLocalThread(createdPost);
 
     this.setState({createdPost: {body: ''}});
   },

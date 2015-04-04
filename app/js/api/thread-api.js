@@ -43,3 +43,7 @@ exports.getThreadById = function(id) {
 exports.updateLocal = function(post) {
   return Promise.resolve(post);
 }
+
+exports.setSubject = function(subject) {
+  return Promise.resolve(subject);
+}

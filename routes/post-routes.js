@@ -30,8 +30,8 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/', function(req, res) {
-    Post.find(function(err, posts) {
+  router.get('/:id', function(req, res) {
+    Post.find({threadId: req.params.id}, function(err, posts) {
       if (err) return res.status(500).send('Could not find posts');
       res.json(posts);
     });

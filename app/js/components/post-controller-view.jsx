@@ -9,7 +9,6 @@ var PostList = require('./post-list.jsx');
 var Footer = require('./footer.jsx');
 var Header = require('./header.jsx');
 var PostStore = require('../stores/post-store');
-var PostActions = require('../actions/post-actions');
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
 var ThreadStore = require('../stores/thread-store');
@@ -18,9 +17,10 @@ var Cookies = require('cookies-js');
 
 function getState(){
   return {
-    postData: ThreadStore.getCurrentThread(),
+    postData: PostStore.getPosts(),
     session: UserStore.getSession(),
-    threadData: ThreadStore.getUserThreads()
+    threadList: ThreadStore.getUserThreads(),
+    threadSubject: ThreadStore.getCurrentSubject()
   };
 };
 
@@ -38,7 +38,6 @@ module.exports = React.createClass({
     PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     ThreadStore.addChangeListener(this._onChange);
-    PostActions.getPosts();
     ThreadActions.getThreadsByUser();
     if(token) {
       UserActions.getSignedIn(token);
@@ -60,13 +59,14 @@ module.exports = React.createClass({
     var storeSession = UserStore.getSession();
     var threadId = this.state.postData.thread ? this.state.postData.thread._id : '';
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
-
+    //routes to profile-page and post-list
     return (
       <div>
         <Header sessionData={this.state.session}/>
         <main>
           <RouteHandler params={this.props.params} postData={this.state.postData}
-            sessionData={this.state.session} threadData={this.state.threadData}/>
+            sessionData={this.state.session} threadData={this.state.threadList}
+            threadSubject={this.state.threadSubject}/>
         </main>
         <Footer threadId={threadId} sessionData={this.state.session}/>
       </div>

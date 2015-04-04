@@ -9,6 +9,7 @@ var PostStore = require('./post-store')
 
 var currentThread = [];
 var userThreads = [];
+var currentSubject = '';
 
 var ThreadStore = assign({}, EventEmitter.prototype, {
   getCurrentThread: function() {
@@ -17,6 +18,10 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
 
   getUserThreads: function() {
     return userThreads;
+  },
+
+  getCurrentSubject: function() {
+    return currentSubject;
   },
 
   emitChange: function() {
@@ -58,6 +63,12 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
     'THREAD_UPDATE_LOCAL': function() {
       return promise.then(function(res) {
         currentThread.posts.push(res);
+      })
+    },
+
+    'THREAD_SET_CURRENT_SUBJECT': function() {
+      return promise.then(function(res) {
+        currentSubject = res;
       })
     }
   }

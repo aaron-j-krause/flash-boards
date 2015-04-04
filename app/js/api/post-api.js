@@ -17,8 +17,8 @@ function makePromise(method, url, body) {
   });
 }
 
-exports.getAllPosts = function() {
-  var promise = makePromise('GET', '/posts/', null);
+exports.getPostsByThreadId = function(id) {
+  var promise = makePromise('GET', '/posts/' + id, null);
   return promise.catch(function(err) {
     console.log(err);
   });
