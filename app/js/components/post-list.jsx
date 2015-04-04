@@ -12,9 +12,12 @@ module.exports = React.createClass({
       )
     }.bind(this));
     return (
-      <ul className='post-list'>
-        {posts}
-      </ul>
+      <div>
+        <header>THIS IS A THREAD</header>
+        <ul className='post-list'>
+          {posts}
+        </ul>
+      </div>
     );
   }
 });

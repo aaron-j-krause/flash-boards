@@ -33,12 +33,14 @@ AppDispatcher.register(function(payload) {
         postData.push(res.body);
       });
     },
+
     POST_EDIT: function() {
       return promise.then(function(res) {
         var index = postData.indexOf(res.body);
         postData[index] = res.body;
       });
     },
+
     POST_DELETE: function() {
       return promise.then(function(res) {
         var index = -1;
@@ -48,6 +50,7 @@ AppDispatcher.register(function(payload) {
         postData.splice(index, 1);
       });
     },
+
     POST_GET_ALL: function() {
       return promise.then(function(res) {
         postData = res.body;

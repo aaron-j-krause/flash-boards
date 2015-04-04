@@ -12,11 +12,17 @@ var SignIn = require('./components/signin.jsx');
 var SignUp = require('./components/signup.jsx');
 var Welcome = require('./components/welcome.jsx');
 var Main = require('./components/main.jsx');
+var PostList = require('./components/post-list.jsx');
+var ProfilePage = require('./components/profile-page.jsx');
 
 var routes = (
   <Route name="main" path="/" handler={Main}>
     <DefaultRoute handler={Welcome} />
-    <Route name="app" path="/home" handler={PostControllerView}/>
+    <Route name="app" path="/home" handler={PostControllerView}>
+      <DefaultRoute handler={ProfilePage}/>
+      <Route name="profile" path="/profile" handler={ProfilePage}/>
+      <Route name="thread" path="/thread" handler={PostList}/>
+    </Route>
     <Route name="signin" path="/sign-in" handler={SignIn} />
     <Route name="signup" path="/sign-up" handler={SignUp} />
   </Route>
