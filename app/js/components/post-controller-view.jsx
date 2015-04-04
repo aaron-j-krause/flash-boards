@@ -59,7 +59,6 @@ module.exports = React.createClass({
     var state = getState();
     var storeSession = UserStore.getSession();
     var threadId = this.state.postData.thread ? this.state.postData.thread._id : '';
-    console.log(this.state.postData,'HAS POSOSOST??')
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
 
     return (

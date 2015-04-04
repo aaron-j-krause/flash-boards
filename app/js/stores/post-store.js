@@ -23,7 +23,7 @@ var PostStore = assign({}, EventEmitter.prototype, {
 
 //handles promises sent from actions
 
-AppDispatcher.register(function(payload) {
+PostStore.dispatchToken = AppDispatcher.register(function(payload) {
   var actionType = payload.action.actionType;
   var promise = payload.action.promise;
 
@@ -61,7 +61,6 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function() {
-    console.log('POST CHANGE');
     PostStore.emitChange();
   });
 

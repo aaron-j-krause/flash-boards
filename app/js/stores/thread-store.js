@@ -5,6 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var UserActions = require('../actions/user-actions');
 var NavEmitter = require('./navigation-emitter');
+var PostStore = require('./post-store')
 
 var currentThread = [];
 var userThreads = [];
@@ -31,7 +32,7 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(payload) {
+ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
   var promise = payload.action.promise;
   var actionType = payload.action.actionType;
 
@@ -55,9 +56,8 @@ AppDispatcher.register(function(payload) {
     },
 
     'THREAD_UPDATE_LOCAL': function() {
-      console.log('THREAD UPDATE')
       return promise.then(function(res) {
-        currentThread.push(res);
+        currentThread.posts.push(res);
       })
     }
   }
@@ -65,7 +65,6 @@ AppDispatcher.register(function(payload) {
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function(){
-    console.log('THREAD CHANGE');
     ThreadStore.emitChange()
   });
 
