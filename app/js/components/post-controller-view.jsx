@@ -56,7 +56,7 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <Header/>
+        <Header sessionData={this.state.session}/>
         <main>
           <RouteHandler params={this.props.params} postData={this.state.postData}
             sessionData={this.state.session}/>

@@ -14,7 +14,7 @@ module.exports = React.createClass({
     var session = this.props.sessionData;
     var path = this.context.router.getCurrentPathname();
     var form = path === '/thread' ? <CreatePostForm sessionData={session}/> : '';
-    console.log(this.context.router.getCurrentPathname())
+
     return (
       <footer>
         {form}
