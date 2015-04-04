@@ -23,6 +23,14 @@ module.exports = {
     });
   },
 
+  getThreadsByTag: function(user) {
+    var promise = ThreadAPI.getThreadsByTag(user);
+    AppDispatcher.handleAction({
+      actionType: 'THREAD_GET_BY_TAG',
+      promise: promise
+    })
+  },
+
   getThreadById: function(id) {
     var promise = ThreadAPI.getThreadById(id);
     AppDispatcher.handleAction({

@@ -38,12 +38,18 @@ module.exports = function(router) {
     });
   });
 
+  router.get('/tags/:user', function(req, res) {
+    Thread.find({users: req.params.user}, 'subject', function(err, titles) {
+      if (err) return res.status(500).send({msg: 'could not find threads'});
+      res.json(titles)
+    })
+  })
+
   router.get('/:id', function(req, res) {
     Thread.findOne({_id: req.params.id}, function(err, thread) {
       if (err) return res.status(500).send({msg: 'could not find threads'});
       Post.find({threadId: req.params.id}, function(err, posts) {
         if (err) return res.status(500).send({msg: 'could not find threads'});
-          console.log(thread, posts)
           res.json({thread: thread, posts: posts});
       });
     });

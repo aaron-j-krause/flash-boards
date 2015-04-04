@@ -21,6 +21,10 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
     return userThreads;
   },
 
+  getTaggedThreads: function() {
+    return taggedThreads;
+  },
+
   getCurrentSubject: function() {
     return currentSubject;
   },
@@ -60,9 +64,15 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
       });
     },
 
+    'THREAD_GET_BY_TAG': function() {
+      return promise.then(function(res) {
+        taggedThreads = res.body;
+      })
+    },
+
     'THREAD_GET_BY_ID': function() {
       return promise.then(function(res) {
-        currentThread = res.body;
+        currentThread = res.body.thread;
       });
     },
 

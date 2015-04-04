@@ -40,6 +40,14 @@ exports.getThreadById = function(id) {
   });
 };
 
+exports.getThreadsByTag = function(user) {
+  var url = '/threads/tags/' + user;
+  var promise = makePromise('GET', url, null);
+  return promise.catch(function(err) {
+    console.log(err);
+  })
+};
+
 exports.updateLocal = function(post) {
   return Promise.resolve(post);
 }

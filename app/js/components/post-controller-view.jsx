@@ -20,6 +20,7 @@ function getState(){
     postData: PostStore.getPosts(),
     session: UserStore.getSession(),
     threadList: ThreadStore.getUserThreads(),
+    taggedThreadList: ThreadStore.getTaggedThreads(),
     threadSubject: ThreadStore.getCurrentSubject(),
     currentThread: ThreadStore.getCurrentThread()
   };
@@ -67,7 +68,7 @@ module.exports = React.createClass({
         <main>
           <RouteHandler params={this.props.params} postData={this.state.postData}
             sessionData={this.state.session} threadData={this.state.threadList}
-            threadSubject={this.state.threadSubject}/>
+            threadSubject={this.state.threadSubject} taggedThreads = {this.state.taggedThreadList}/>
         </main>
         <Footer threadId={threadId} sessionData={this.state.session}/>
       </div>

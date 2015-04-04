@@ -21,7 +21,7 @@ module.exports = React.createClass({
     createdPost.user = this.props.sessionData.name;
     createdPost.threadId = this.props.threadId;
     PostActions.createPost(createdPost);
-    console.log(createdPost, 'IN POST SUBMIT');
+
     this.setState({createdPost: {body: ''}});
   },
 
