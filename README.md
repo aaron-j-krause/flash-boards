@@ -1,2 +1,2 @@
 Flash Boards
-A simple React app with a Node/Express Backend and a Mongo Persistence
+A React/Flux tag based micro-forum concept with a Node/Express backend and a Mongo persistence.
