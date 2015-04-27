@@ -7,7 +7,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-webpack');
@@ -61,8 +60,8 @@ module.exports = function(grunt) {
     },
 
     webpack:{
-      options: webpackConfig
-    }
+      build: require('./webpack.config')
+    },
 
     watch:{
       files:['app/js/**/*.js', 'app/js/**/*.jsx', 'app/**/*.html',
@@ -82,7 +81,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['jshint', 'jscs']);
-  grunt.registerTask('build', ['clean', 'browserify:dev', 'sass', 'copy']);
+  grunt.registerTask('build', ['clean', 'webpack', 'sass', 'copy']);
   grunt.registerTask('build:test', ['build:test']);
 
 };
