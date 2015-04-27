@@ -27,13 +27,17 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jscs": "^1.5.0",
     "grunt-sass": "^0.18.1",
+    "grunt-webpack": "^1.0.8",
     "is-promise": "^2.0.0",
     "jasmine-core": "^2.2.0",
+    "jsx-loader": "^0.13.1",
     "mocha": "^2.1.0",
     "node-bourbon": "^4.2.1-beta1",
     "node-neat": "^1.7.1-beta1",
     "react-router": "^0.13.2",
-    "reactify": "^1.0.0"
+    "reactify": "^1.0.0",
+    "webpack": "^1.8.10",
+    "webpack-dev-server": "^1.8.2"
   },
   "dependencies": {
     "bcrypt": "^0.8.1",

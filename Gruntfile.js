@@ -10,6 +10,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-webpack');
 
   grunt.initConfig({
     jshint:{
@@ -58,6 +59,10 @@ module.exports = function(grunt) {
         transform:['reactify']
       }
     },
+
+    webpack:{
+      options: webpackConfig
+    }
 
     watch:{
       files:['app/js/**/*.js', 'app/js/**/*.jsx', 'app/**/*.html',
