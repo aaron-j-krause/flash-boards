@@ -49,3 +49,5 @@ gulp.task('webpack', function() {
 });
 
 gulp.task('default', ['jscs', 'jshint', 'clean', 'copy', 'sass', 'webpack']);
+gulp.task('build', ['clean', 'copy', 'sass', 'webpack']);
+
