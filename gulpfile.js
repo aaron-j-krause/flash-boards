@@ -11,16 +11,17 @@ var webpack = require('gulp-webpack');
 var paths = {
   js: './app/**/*.js',
   html: './app/index.html',
-  sass: './app/sass/**/*'
+  sass: './app/sass/**/*',
+  client: './app/js/client.jsx'
 };
 
 gulp.task('jscs', function() {
-  return gulp.src('./app/**/*.js')
+  return gulp.src(paths.js)
     .pipe(jscs());
 });
 
 gulp.task('jshint', function() {
-  return gulp.src('./app/**/*.js')
+  return gulp.src(paths.js)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
@@ -30,7 +31,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('copy', function() {
-  return gulp.src('./app/index.html')
+  return gulp.src(paths.html)
     .pipe(gulp.dest('./build'))
 });
 
@@ -43,11 +44,10 @@ gulp.task('sass', function() {
 });
 
 gulp.task('webpack', function() {
-  return gulp.src('./app/js/client.jsx')
+  return gulp.src(paths.client)
     .pipe(webpack(require('./webpack.config')))
     .pipe(gulp.dest('./build'));
 });
 
 gulp.task('default', ['jscs', 'jshint', 'clean', 'copy', 'sass', 'webpack']);
 gulp.task('build', ['clean', 'copy', 'sass', 'webpack']);
-
