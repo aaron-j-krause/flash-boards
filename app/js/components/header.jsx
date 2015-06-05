@@ -12,10 +12,18 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <header>
-        <Link to="profile">Profile</Link>
-        <Link to="thread">Thread</Link>
-        <a href="#" onClick={this.handleClick}>Sign Out</a>
+      <header className="main-header">
+        <ul className="header-links">
+          <li>
+            <Link to="profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="thread">Thread</Link>
+          </li>
+          <li>
+            <a href="#" onClick={this.handleClick}>Sign Out</a>
+          </li>
+        </ul>
         <p>Signed in as {this.props.sessionData.name}</p>
       </header>
     );

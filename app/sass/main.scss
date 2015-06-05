@@ -1,20 +1,13 @@
 @import "bourbon";
 @import "neat";
-$primary-color: #333;
-$main-color: hsl(232, 100%, 37%);
-$main-color-hue: hue($main-color);
-$main-color-saturation: saturation($main-color);
-$main-color-lightness: lightness($main-color);
-
 
 $color-light: rgb(100, 120, 255);
 $color-dark: rgb(0, 0, 205);
 $color-border: rgb(0, 0, 40);
 
-$main-light: lighten($main-color, 25%);
-
-$color2: hsl($main-color-hue + (120 * 1), $main-color-saturation, $main-color-lightness);
-$color3: hsl($main-color-hue + (120 * 2), $main-color-saturation, $main-color-lightness);
+* {
+  margin: 0;
+}
 
 button, input[type="button"], input[type="submit"] {
   background: $color-light;
@@ -47,7 +40,6 @@ div.welcome {
 
 body {
   font-family: $helvetica;
-  color: $primary-color;
   @include outer-container(70%);
   margin: 0 auto;
   min-width: 525px;
@@ -58,12 +50,36 @@ header {
   background-color: $color-light;
   margin-bottom: 20px;
   border-radius: 10px;
-  
+  padding: 5px;
+}
+
+.main-header {
+  height: 50px;
+  background-color: $color-light;
+  margin: 10px 0px 10px 0px;
+  border-radius: 10px;
+  padding: 5px;
+
+  .header-links {
+    list-style: none;
+    float: left;
+    padding: 0;
+    li {
+      display: inline;
+      margin-left: 10px;
+    }
+  }
+
+  p {
+    margin: 0;
+    float: right;
+  }
+
 }
 
 footer {
   height: 120px;
-  background-color: lighten($color3, 30%);
+  background-color: $color-light;
   margin: 20px 0px 20px 0px;
   border-radius: 10px;
   padding: 10px;
