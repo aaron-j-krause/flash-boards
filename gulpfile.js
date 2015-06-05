@@ -26,16 +26,16 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('clean', function() {
-  del(['./build/**/*']);
+gulp.task('clean', function(cb) {
+  del(['./build/**/*'], cb);
 });
 
-gulp.task('copy', function() {
+gulp.task('copy', ['clean'], function() {
   return gulp.src(paths.html)
     .pipe(gulp.dest('./build'))
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', ['clean'], function() {
   return gulp.src(paths.sass)
     .pipe(sass({
       includePaths: ['sass'].concat(neat)
@@ -43,11 +43,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('./build/css'));
 });
 
-gulp.task('webpack', function() {
+gulp.task('webpack', ['clean'], function() {
   return gulp.src(paths.client)
     .pipe(webpack(require('./webpack.config')))
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('default', ['jscs', 'jshint', 'clean', 'copy', 'sass', 'webpack']);
+gulp.task('default', ['jscs', 'jshint', 'clean', 'sass', 'webpack', 'copy']);
 gulp.task('build', ['clean', 'copy', 'sass', 'webpack']);

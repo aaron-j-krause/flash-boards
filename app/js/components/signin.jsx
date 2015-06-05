@@ -35,11 +35,11 @@ module.exports = React.createClass({
     if (this.state.session.error) error = this.state.session.error;
 
     return (
-      <div className='welcome'>
+      <main className='welcome'>
         <h1>SIGN IN</h1>
         <SignInForm />
         <span>{error}</span>
-      </div>
+      </main>
     );
   }
 });

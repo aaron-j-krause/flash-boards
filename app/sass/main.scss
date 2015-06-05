@@ -83,7 +83,6 @@ main {
       border-radius: 10px;
       @include span-columns(6);
       @include padding(30px 30px 5px 30px);
-      @include linear-gradient(65deg, $main-light, lighten($main-light, 30%));
       @include fill-parent();
 
       section.post-body {
