@@ -34,7 +34,7 @@ var UserStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(payload) {
+UserStore.dispatchToken = AppDispatcher.register(function(payload) {
   var promise = payload.action.promise;
   var actionType = payload.action.action;
 
@@ -49,6 +49,7 @@ AppDispatcher.register(function(payload) {
       return promise.then(function(res) {
         Cookies.set('eat', res.body.token);
         session = {
+          name: res.body.name,
           loggedIn: true
         };
         NavEmitter.emitChange();

@@ -28,7 +28,7 @@ var threadRouter = express.Router();
 
 assignPostRoutes(postRouter);
 assignUserRoutes(userRouter, passport, app.get('appSecret'));
-assignThreadRoutes(threadRouter);
+assignThreadRoutes(threadRouter, app.get('appSecret'));
 
 app.use('/user', userRouter);
 app.use('/posts', postRouter);

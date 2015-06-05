@@ -9,7 +9,7 @@ var ThreadList = require('./thread-list.jsx');
 //child route of post-controller-view
 var ProfilePage = React.createClass({
   componentDidMount: function() {
-    ThreadActions.getThreadsByTag(this.props.sessionData.name);
+
   },
 
   render: function() {

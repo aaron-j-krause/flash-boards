@@ -2,8 +2,9 @@
 
 var Post = require('../models/post-model');
 var Thread = require('../models/thread-model');
+var eatAuth = require('../lib/eat-auth');
 
-module.exports = function(router) {
+module.exports = function(router, appSecret) {
   router.post('/', function(req, res) {
     var newThread = new Thread({
       author: req.body.author,
@@ -31,15 +32,16 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/titles/:user', function(req, res) {
-    Thread.find({author: req.params.user}, 'subject', function(err, titles){
+  router.get('/titles/', eatAuth(appSecret), function(req, res) {
+    var token = req.headers.token;
+    Thread.find({author: req.user.name}, 'subject', function(err, titles){
       if (err) return res.status(500).send({msg: 'could not find threads'});
       res.json(titles);
     });
   });
 
-  router.get('/tags/:user', function(req, res) {
-    Thread.find({users: req.params.user}, 'subject', function(err, titles) {
+  router.get('/tags/', eatAuth(appSecret), function(req, res) {
+    Thread.find({users: req.user.name}, 'subject', function(err, titles) {
       if (err) return res.status(500).send({msg: 'could not find threads'});
       res.json(titles)
     })

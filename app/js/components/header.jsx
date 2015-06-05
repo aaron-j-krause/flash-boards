@@ -4,7 +4,7 @@ var React = require('react');
 var Link = require('react-router').Link;
 var UserActions = require('../actions/user-actions');
 
-module.exports = React.createClass({
+var Header = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
     UserActions.signOut();
@@ -29,3 +29,5 @@ module.exports = React.createClass({
     );
   }
 })
+
+module.exports = Header;
