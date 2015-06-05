@@ -34,8 +34,9 @@ module.exports = React.createClass({
 
     return (
       <li className="post">
-        <section className="post-body">{this.props.postData.body}</section>
+        <div className="post-top-bar">#</div>
         <aside className="user-data">posted by: {this.props.postData.user}</aside>
+        <section className="post-body">{this.props.postData.body}</section>
         {editButton}
         {editForm}
       </li>

@@ -2,7 +2,7 @@
 @import "neat";
 
 $color-light: rgb(100, 120, 255);
-$color-dark: rgb(0, 0, 205);
+$color-dark: rgb(0, 100, 225);
 $color-border: rgb(0, 0, 40);
 
 * {
@@ -35,7 +35,9 @@ input:focus {
 
 div.welcome {
   margin: 200px auto 300px auto;
-  @include size(400px 200px);
+  height: 100px;
+  width: 600px;
+  background-color: $color-light;
 }
 
 body {
@@ -45,30 +47,20 @@ body {
   min-width: 525px;
 }
 
-header {
-  height: 100px;
+.thread-header {
+  height: 50px;
   background-color: $color-light;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  padding: 5px;
+  margin: 10px 0px 10px 0px;
+  padding: 10px;
+  box-shadow: inset 0 0 0 2px $color-border;
 }
 
 .main-header {
   height: 50px;
   background-color: $color-light;
   margin: 10px 0px 10px 0px;
-  border-radius: 10px;
-  padding: 5px;
-
-  .header-links {
-    list-style: none;
-    float: left;
-    padding: 0;
-    li {
-      display: inline;
-      margin-left: 10px;
-    }
-  }
+  padding: 10px;
+  box-shadow: inset 0 0 0 2px $color-border;
 
   p {
     margin: 0;
@@ -77,11 +69,20 @@ header {
 
 }
 
+.nav-list {
+  list-style: none;
+  float: left;
+  padding: 0;
+  li {
+    display: inline;
+    margin-left: 10px;
+  }
+}
+
 footer {
   height: 120px;
   background-color: $color-light;
   margin: 20px 0px 20px 0px;
-  border-radius: 10px;
   padding: 10px;
   form {
     @include span-columns(4);
@@ -96,7 +97,7 @@ footer {
 
 }
 
-main.controller-view {
+.controller-view {
   @include clearfix;
     ul.post-list {
     margin: 0 auto;
@@ -106,22 +107,28 @@ main.controller-view {
     li.post {
       background-color: $color-light;
       border: 1px solid $color-border;
-
-      margin-bottom: 10px;
+      margin-bottom: 1px;
       border-radius: 10px;
-      @include span-columns(6);
-      @include padding(30px 30px 5px 30px);
-      @include fill-parent();
+      @include span-columns(12);
+
+      .post-top-bar {
+        @include fill-parent();
+        float: none;
+        background-color: $color-dark;
+      }
 
       section.post-body {
         min-height: 100px;
         min-width: 100px;
-        @include fill-parent();
-        @include span-columns(5 of 6);
+        padding: 10px;
+        display: inline-block;
+        @include span-columns(10 of 12);
       }
 
       aside.user-data {
-        @include span-columns(1 of 6);
+        @include span-columns(2 of 12);
+        display: inline-block;
+        padding: 10px;
         @include omega();
       }
 

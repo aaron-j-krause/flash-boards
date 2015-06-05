@@ -13,7 +13,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <header className="main-header">
-        <ul className="header-links">
+        <ul className="nav-list">
           <li>
             <Link to="profile">Profile</Link>
           </li>

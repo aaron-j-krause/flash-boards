@@ -14,7 +14,7 @@ var PostList = React.createClass({
     }.bind(this));
     return (
       <div>
-        <header>{this.props.threadSubject}</header>
+        <header className="thread-header">{this.props.threadSubject}</header>
         <ul className='post-list'>
           {posts}
         </ul>
