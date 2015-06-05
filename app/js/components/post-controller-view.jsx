@@ -17,7 +17,7 @@ var Cookies = require('cookies-js');
 
 function getState(){
   return {
-    postData: PostStore.getPosts(),
+    postData: ThreadStore.getPosts(),
     session: UserStore.getSession(),
     threadList: ThreadStore.getUserThreads(),
     taggedThreadList: ThreadStore.getTaggedThreads(),

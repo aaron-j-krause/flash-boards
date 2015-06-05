@@ -11,8 +11,13 @@ var currentThread = [];
 var userThreads = [];
 var taggedThreads = [];
 var currentSubject = '';
+var postData = [];
 
 var ThreadStore = assign({}, EventEmitter.prototype, {
+  getPosts: function() {
+    return postData;
+  },
+
   getCurrentThread: function() {
     return currentThread;
   },
@@ -47,6 +52,8 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
   var actionType = payload.action.actionType;
 
   var handlers = {
+
+//Thread handlers
     'THREAD_CREATE': function() {
       return promise.then(function(res) {
         userThreads.push({
@@ -54,6 +61,7 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
           subject: res.body.subject
         })
         currentThread = res.body;
+        postData = [];
         NavEmitter.emitChange();
       })
     },
@@ -87,9 +95,38 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
         currentSubject = res;
         NavEmitter.emitChange();
       })
+    },
+
+//Post handlers
+    POST_CREATE: function() {
+      return promise.then(function(res) {
+        postData.push(res.body);
+      });
+    },
+
+    POST_EDIT: function() {
+      return promise.then(function(res) {
+        var index = postData.indexOf(res.body);
+        postData[index] = res.body;
+      });
+    },
+
+    POST_DELETE: function() {
+      return promise.then(function(res) {
+        var index = -1;
+        postData.forEach(function(p, i) {
+          if (p._id === res.body._id) index =  i;
+        });
+        postData.splice(index, 1);
+      });
+    },
+
+    POST_GET_ALL: function() {
+      return promise.then(function(res) {
+        postData = res.body;
+      });
     }
   }
-
   if (!handlers[actionType]) return true;
 
   handlers[actionType]().then(function(){
