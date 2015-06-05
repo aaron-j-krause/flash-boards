@@ -4,7 +4,8 @@ var React = require('react');
 var ThreadActions = require('../actions/thread-actions');
 var NavEmitter = require('../stores/navigation-emitter');
 
-module.exports = React.createClass({
+//child of Footer
+var Footer = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -21,6 +22,7 @@ module.exports = React.createClass({
     NavEmitter.removeChangeListener(this._nav);
   },
 
+//navigates to new thread page on new thread
   _nav: function() {
     this.context.router.transitionTo('/thread');
   },
@@ -51,3 +53,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Footer;

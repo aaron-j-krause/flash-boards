@@ -34,15 +34,15 @@ var ThreadList = React.createClass({
     var threadLinks = this.props.threadData.map(function(thread, i){
       return (
         <li key={i}>
-          <a style={{color:'red'}} href="#" onClick={this.handleClick}
+          <a href="#" onClick={this.handleClick}
             key={thread._id} data-id={thread._id}>{thread.subject}</a>
         </li>)
     }.bind(this));
 
     return (
-        <ul>
-          {threadLinks}
-        </ul>
+      <ul className='thread-list'>
+        {threadLinks}
+      </ul>
     );
   }
 });
