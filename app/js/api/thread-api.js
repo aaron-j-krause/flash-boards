@@ -3,6 +3,7 @@
 var Promise = require('promise');
 var ThreadActions = require('../actions/thread-actions');
 var request = require('superagent');
+var Cookies = require('cookies-js');
 
 exports = module.exports = {};
 
@@ -25,10 +26,16 @@ exports.createNewThread = function(thread) {
 };
 
 exports.getThreadsByUser = function(user) {
-  var url = '/threads/titles/radguy';
-  var promise = makePromise('GET', url, null);
-  return promise.catch(function(err) {
-    console.log(err);
+  var url = '/threads/titles/';
+  var token = Cookies.get('eat');
+  var promise = makePromise('GET', url, token);
+  return new Promise(function(resolve, reject) {
+    request('GET', url)
+      .set('eat', token)
+      .end(function(err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
   });
 };
 
@@ -41,11 +48,17 @@ exports.getThreadById = function(id) {
 };
 
 exports.getThreadsByTag = function(user) {
-  var url = '/threads/tags/' + user;
-  var promise = makePromise('GET', url, null);
-  return promise.catch(function(err) {
-    console.log(err);
-  })
+  var url = '/threads/tags/';
+  var token = Cookies.get('eat');
+  var promise = makePromise('GET', url, token);
+  return new Promise(function(resolve, reject) {
+    request('GET', url)
+      .set('eat', token)
+      .end(function(err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
+  });
 };
 
 exports.updateLocal = function(post) {

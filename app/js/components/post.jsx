@@ -21,7 +21,6 @@ module.exports = React.createClass({
     var buttonText = this.state.showEdit ? 'Cancel' : 'Edit Post';
     var editForm;
     var editButton;
-    console.log(typeof this.props.postData._id)
     if(isUser) {
       editButton = <button className="show-edit"
         onClick={this.showEdit}>{buttonText}</button>

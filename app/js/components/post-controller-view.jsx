@@ -8,7 +8,6 @@ var RouteHandler = Router.RouteHandler;
 var Thread = require('./thread.jsx');
 var Footer = require('./footer.jsx');
 var Header = require('./header.jsx');
-var PostStore = require('../stores/post-store');
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
 var ThreadStore = require('../stores/thread-store');
@@ -36,18 +35,15 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(){
-    var token = Cookies.get('eat');
-    PostStore.addChangeListener(this._onChange);
     UserStore.addChangeListener(this._onChange);
     ThreadStore.addChangeListener(this._onChange);
-    ThreadActions.getThreadsByUser();
-    if(token) {
-      UserActions.getSignedIn(token);
+    if(Cookies.get('eat')) {
+      ThreadActions.getThreadsByTag();
+      ThreadActions.getThreadsByUser();
     }
   },
 
   componentWillUnmount: function() {
-    PostStore.removeChangeListener(this._onChange);
     UserStore.removeChangeListener(this._onChange);
     ThreadStore.removeChangeListener(this._onChange);
   },

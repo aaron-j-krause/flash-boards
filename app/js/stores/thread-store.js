@@ -5,7 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var UserActions = require('../actions/user-actions');
 var NavEmitter = require('./navigation-emitter');
-var PostStore = require('./post-store')
+var UserStore = require('./user-store');
 
 var currentThread = [];
 var userThreads = [];
@@ -67,6 +67,7 @@ ThreadStore.dispatchToken = AppDispatcher.register(function(payload) {
     },
 
     'THREAD_GET_BY_USER': function() {
+      AppDispatcher.waitFor([UserStore.dispatchToken]);
       return promise.then(function(res) {
         userThreads = res.body;
       });
