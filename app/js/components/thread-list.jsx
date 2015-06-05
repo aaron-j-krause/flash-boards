@@ -40,7 +40,7 @@ var ThreadList = React.createClass({
     }.bind(this));
 
     return (
-        <ul>
+        <ul className='thread-list'>
           {threadLinks}
         </ul>
     );

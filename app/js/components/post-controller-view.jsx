@@ -65,7 +65,7 @@ module.exports = React.createClass({
     return (
       <div>
         <Header sessionData={this.state.session}/>
-        <main>
+        <main className="controller-view">
           <RouteHandler params={this.props.params} postData={this.state.postData}
             sessionData={this.state.session} threadData={this.state.threadList}
             threadSubject={this.state.threadSubject} taggedThreads = {this.state.taggedThreadList}/>
