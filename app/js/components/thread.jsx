@@ -4,7 +4,7 @@ var React = require('react');
 var Post = require('./post.jsx');
 
 //child of controller view routed to by links in header
-var Thread = React.createClass({
+var PostList = React.createClass({
   render: function() {
     var posts = this.props.postData.map(function(post, i){
       return (
@@ -23,4 +23,4 @@ var Thread = React.createClass({
   }
 });
 
-module.exports = Thread;
+module.exports = PostList;

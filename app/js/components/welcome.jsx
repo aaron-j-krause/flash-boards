@@ -3,9 +3,9 @@
 var React = require('react');
 var Link = require('react-router').Link
 
-// /*
-// Initial view, links to signup and signin.
-// */
+/**
+*Initial view, links to signup and signin.
+*/
 
 
 module.exports = React.createClass({

@@ -21,7 +21,7 @@ module.exports = React.createClass({
     var buttonText = this.state.showEdit ? 'Cancel' : 'Edit Post';
     var editForm;
     var editButton;
-
+    console.log(typeof this.props.postData._id)
     if(isUser) {
       editButton = <button className="show-edit"
         onClick={this.showEdit}>{buttonText}</button>
@@ -34,10 +34,13 @@ module.exports = React.createClass({
 
     return (
       <li className="post">
-        <div className="post-top-bar">#</div>
-        <aside className="user-data">posted by: {this.props.postData.user}</aside>
+        <div className="post-top-bar">#{this.props.postNumber}</div>
+        <aside className="user-data">
+          <img className="avatar" alt="avatar" />
+          <p>{this.props.postData.user}</p>
+          {editButton}
+        </aside>
         <section className="post-body">{this.props.postData.body}</section>
-        {editButton}
         {editForm}
       </li>
     );

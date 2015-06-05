@@ -5,7 +5,7 @@ var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 
-var PostList = require('./post-list.jsx');
+var Thread = require('./thread.jsx');
 var Footer = require('./footer.jsx');
 var Header = require('./header.jsx');
 var PostStore = require('../stores/post-store');
@@ -61,7 +61,7 @@ module.exports = React.createClass({
     var storeSession = UserStore.getSession();
     var threadId = this.state.currentThread._id || '';
     if (!storeSession.loggedIn) this.context.router.transitionTo('/sign-in');
-    //routes to profile-page and post-list
+    //routes to profile-page and thread
     return (
       <div>
         <Header sessionData={this.state.session}/>
