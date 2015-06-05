@@ -18,7 +18,7 @@ var Footer = React.createClass({
       <CreateThreadForm sessionData={session}/>;
 
     return (
-      <footer>
+      <footer className="main-footer">
         {form}
       </footer>
     );

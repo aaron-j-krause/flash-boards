@@ -10,6 +10,7 @@ var webpack = require('gulp-webpack');
 
 var paths = {
   js: './app/**/*.js',
+  jsx: './app/**/*.jsx',
   html: './app/index.html',
   sass: './app/sass/**/*',
   client: './app/js/client.jsx'
@@ -48,6 +49,10 @@ gulp.task('webpack', ['clean'], function() {
     .pipe(webpack(require('./webpack.config')))
     .pipe(gulp.dest('./build'));
 });
+
+gulp.task('watch', function() {
+  gulp.watch([paths.js, paths.sass, paths.jsx], ['build'])
+})
 
 gulp.task('default', ['jscs', 'jshint', 'clean', 'sass', 'webpack', 'copy']);
 gulp.task('build', ['clean', 'copy', 'sass', 'webpack']);

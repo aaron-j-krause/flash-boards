@@ -14,10 +14,10 @@ var ProfilePage = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <p>Threads You Started</p>
+      <div className="profile-page">
+        <h2>Threads You Started</h2>
         <ThreadList threadData={this.props.threadData} />
-        <p>Threads You're Tagged In</p>
+        <h2>Threads You're Tagged In</h2>
         <ThreadList threadData={this.props.taggedThreads}/>
       </div>
     );

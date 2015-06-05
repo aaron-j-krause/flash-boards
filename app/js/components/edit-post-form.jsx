@@ -3,7 +3,11 @@
 var React = require('react');
 var PostActions = require('../actions/post-actions');
 
-module.exports = React.createClass({
+/**
+* Child of Post
+*/
+
+var EditPostForm = React.createClass({
   getInitialState: function() {
     return {editedPost: this.props.postData};
   },
@@ -42,3 +46,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = EditPostForm;
